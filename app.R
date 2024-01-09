@@ -1,5 +1,5 @@
 library(shiny)
-# setwd("./projekty/health/src/app")
+options(shiny.autoreload = TRUE)
 
 source("ui.R")
 source("server.R")

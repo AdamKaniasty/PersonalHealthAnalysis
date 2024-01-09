@@ -18,10 +18,11 @@ ui <- fluidPage(
                         )
                       )
              ),
-             tabPanel("Page 1",
+             tabPanel("Siłka",
                       fluidRow(
                         column(12,
-                               h2("Siłownia"))
+                          source("./ui/gym.R")
+                          )
                       )
              ),
              tabPanel("Page 2",
