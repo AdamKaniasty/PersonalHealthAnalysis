@@ -8,12 +8,26 @@ library(tidyr)
 
 
 source("./src/gym/spider.R")
+source("./src/gym/muscles/muscles.R")
+
 
 gymLogic <- function(input, output, session) {
   output$gym_spider <- renderPlotly({
     gymSpider(as.numeric(input$spider_date_start))
   })
   
+  #output$gym_progress <- 
+    
+  #output$gym_weight_distribution <- 
+    
+  #output$gym_time-performance <-
+  
+  output$gym_muscles <- renderImage({
+    image <- musclesPlot()
+    list(
+      src="./image_composite.png"
+    )
+  }, deleteFile = T)
   
   output$stacked_progress <- renderD3({
     data <- read.csv("./data/gym/predki.csv")

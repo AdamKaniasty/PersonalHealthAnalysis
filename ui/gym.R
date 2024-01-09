@@ -22,7 +22,7 @@ gymUI <- tagList(gymUI,
 # Second row: Plot and text next to each other
 gymUI <- tagList(gymUI,
                  fluidRow(
-                   column(6, plotOutput("plot3")),
+                   column(6, imageOutput("gym_muscles")),
                    column(6, 
                           h4("Information about Plot 3"),
                           verbatimTextOutput("text1"))
