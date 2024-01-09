@@ -1,7 +1,7 @@
 library(plotly)
 library(dplyr)
 library(lubridate)
-# setwd("./projekty/health")
+setwd("./projekty/health")
 data <- read.csv("./data/gym/predki.csv")
 
 last_week_start <- floor_date(Sys.Date() - 7, unit = "week")
