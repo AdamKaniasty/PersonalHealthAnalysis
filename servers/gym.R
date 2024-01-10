@@ -9,16 +9,20 @@ library(tidyr)
 
 source("./src/gym/spider.R")
 source("./src/gym/muscles/muscles.R")
-
+source("./src/gym/weightMusclesDistribution.R")
+source("./src/gym/progress.R")
 
 gymLogic <- function(input, output, session) {
+  
   output$gym_spider <- renderPlotly({
     gymSpider(as.numeric(input$spider_date_start))
   })
   
   #output$gym_progress <- 
     
-  #output$gym_weight_distribution <- 
+  output$gym_weight_distribution <- renderPlotly({
+    weightDistribution(input)
+  })
     
   #output$gym_time-performance <-
   

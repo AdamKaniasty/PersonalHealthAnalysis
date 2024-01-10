@@ -16,19 +16,18 @@ gymUI <- tagList(gymUI,
                             selected = 7),
                           plotlyOutput("gym_spider")
                           ),
-                   column(6, d3Output("plot2"))
+                   column(6, plotlyOutput("gym_weight_distribution"))
                  ))
 
-# Second row: Plot and text next to each other
 gymUI <- tagList(gymUI,
                  fluidRow(
-                   column(6, imageOutput("gym_muscles")),
+                   column(6,
+                          imageOutput("gym_muscles")),
                    column(6, 
                           h4("Information about Plot 3"),
                           verbatimTextOutput("text1"))
                  ))
 
-# Third row: Two plots next to each other
 gymUI <- tagList(gymUI,
                  fluidRow(
                    column(12, d3Output("stacked_progress")),

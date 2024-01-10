@@ -19,6 +19,11 @@ ui <- fluidPage(
                       )
              ),
              tabPanel("Siłka",
+                      sidebarPanel(
+                        checkboxGroupInput("variables", "Variables to Display:", 
+                                           choices = c("Weight" = "weight", "Reps" = "reps"),
+                                           selected = "weight")
+                      ),
                       fluidRow(
                         column(12,
                           source("./ui/gym.R")

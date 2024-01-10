@@ -3,8 +3,9 @@ library(readr)
 library(dplyr)
 library(lubridate)
 
-# Wczytanie danych
 data <- read.csv("./data/gym/predki.csv")
+
+gym_progess <- function(){
 
 data <- data %>%
   mutate(date = as.Date(start_time, format = "%d %b %Y")) %>%
@@ -12,7 +13,6 @@ data <- data %>%
   summarize(average_weight = mean(weight_kg, na.rm = TRUE)) %>%
   ungroup()
 
-# Tworzenie wykresu liniowego
 plot <- ggplot(data, aes(x = date, y = average_weight, color = muscle_group)) +
   geom_line() +
   geom_point(size = 2) +
@@ -25,5 +25,5 @@ plot <- ggplot(data, aes(x = date, y = average_weight, color = muscle_group)) +
   ) +
   ggtitle("Progresja średniej wagi dla każdej grupy mięśniowej")
 
-# Wyświetlenie wykresu
-print(plot)
+return(plot)
+}

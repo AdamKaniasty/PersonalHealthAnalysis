@@ -3,11 +3,21 @@ library(dplyr)
 
 data <- read.csv("./data/gym/predki.csv")
 
-data <- data %>%
-  filter(!is.na(weight_kg)) %>%
-  mutate(weight_kg = as.numeric(weight_kg))
+weightDistribution <- function(input){
+plotData <- data
+plotTypes <- list()
 
-plot <- plot_ly(data, y = ~weight_kg, x = ~muscle_group, type = 'violin') %>%
-  layout(yaxis = list(title = 'Waga [kg]'), xaxis = list(title = 'Grupa mięśniowa'))
+p <- plot_ly(data, x = ~muscle_group)
 
-plot
+if ("weight" %in% input$variables) {
+  p <- p %>% add_trace(y = ~weight_kg, name = 'Weight', type = 'violin')
+}
+
+if ("reps" %in% input$variables) {
+  p <- p %>% add_trace(y = ~reps, name = 'Reps', type = 'violin')
+}
+
+p <- p %>% layout(yaxis = list(title = 'Value'), xaxis = list(title = 'Muscle Group'))
+
+return(p)
+}

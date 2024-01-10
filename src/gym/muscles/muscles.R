@@ -20,7 +20,6 @@ colorize <- function(image, reps, max_reps) {
   return(image)
 }
 
-# Initialize an empty list for images
 images <- list()
 
 for (i in seq_len(nrow(total_reps))) {

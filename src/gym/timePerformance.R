@@ -3,7 +3,6 @@ library(readr)
 library(dplyr)
 library(lubridate)
 
-# Wczytanie danych
 data <- read.csv("./data/gym/predki.csv")
 
 # Przygotowanie danych
