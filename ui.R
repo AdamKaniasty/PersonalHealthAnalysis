@@ -10,7 +10,7 @@ ui <- dashboardPage(
       menuItem("Siłka", tabName = "silka", icon = icon("weight")),
       menuItem("Page 2", tabName = "page2", icon = icon("bed")),
       menuItem("Page 3", tabName = "page3", icon = icon("smile")),
-      menuItem("Page 4", tabName = "page4", icon = icon("smile")),
+      menuItem("Page 4", tabName = "page4", icon = icon("utensils")),
       
       conditionalPanel(
         condition = "input.sidebar == 'silka'",
