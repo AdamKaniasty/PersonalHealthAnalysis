@@ -8,14 +8,7 @@ gymUI <- fluidRow(
 
 gymUI <- tagList(gymUI, 
                  fluidRow(
-                   column(6,
-                          selectInput(
-                            "spider_date_start",
-                            "Select Date",
-                            choices = c(7, 31, 10000),
-                            selected = 7),
-                          plotlyOutput("gym_spider")
-                          ),
+                   column(6,plotlyOutput("gym_spider")),
                    column(6, plotlyOutput("gym_weight_distribution"))
                  ))
 
@@ -33,4 +26,4 @@ gymUI <- tagList(gymUI,
                    column(12, d3Output("stacked_progress")),
                  ))
 
-return(gymUI)
+gymUI

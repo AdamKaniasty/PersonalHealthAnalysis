@@ -1,9 +1,9 @@
 r2d3.onRender(function (data, svg, width, height, options) {
-	var margin = { top: 40, right: 10, bottom: 20, left: 30 },
+	var margin = { top: 40, right: 10, bottom: 20, left: 50 },
 		plotWidth = width - margin.left - margin.right,
 		plotHeight = height - margin.top - margin.bottom;
 
-	var seriesNames = Object.keys(data[0]).slice(2); // Assuming first two columns are 'year' and 'week'
+	var seriesNames = Object.keys(data[0]).slice(2);
 
 	var stack = d3
 		.stack()
@@ -71,7 +71,6 @@ r2d3.onRender(function (data, svg, width, height, options) {
 		.style("font-size", "12px")
 		.style("color", "#4a4a4a")
 		.call(d3.axisLeft(y));
-
 	// Adding Labels to Bars
 	layer
 		.selectAll("text")
@@ -102,14 +101,14 @@ r2d3.onRender(function (data, svg, width, height, options) {
 		.style("opacity", 0);
 
 	rect
-		.on("mouseover", function (d) {
+		.on("mouseover", function (event, d) {
 			tooltip.transition().duration(200).style("opacity", 0.9);
 			tooltip
 				.html("Total Weight: " + (d[1] - d[0]))
-				.style("left", d3.event.pageX + "px")
-				.style("top", d3.event.pageY - 28 + "px");
+				.style("left", event.pageX + "px")
+				.style("top", event.pageY - 28 + "px");
 		})
-		.on("mouseout", function (d) {
+		.on("mouseout", function (event, d) {
 			tooltip.transition().duration(500).style("opacity", 0);
 		});
 });
