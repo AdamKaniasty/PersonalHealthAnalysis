@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+source("./intro/intro.R")
 
 ui <- dashboardPage(
   dashboardHeader(title = "Ja"),
@@ -31,10 +32,32 @@ ui <- dashboardPage(
     tabItems(
       tabItem(tabName = "main",
               fluidRow(
-                column(4, h2("Section 1")),
-                column(4, h2("Section 2")),
-                column(4, h2("Section 3"))
-              )
+                column(12, align = 'center',
+                       "Tu na górze będą informacje o projekcie i użytych bibliotekach, oczywiście odpowiednio wystylowane")
+              ),
+              fluidRow(
+                column(4, intro_columns("./photos/Adam.jpg", 
+                                        "Adam Kaniasty", 
+                                        "Krótki opis",
+                                        "https://github.com/AdamKaniasty",
+                                        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), 
+                       align = 'center'),
+                column(4, intro_columns("./photos/Hubert.jpg", 
+                                        "Hubert Kowalski", 
+                                        "Krótki opis",
+                                        "https://github.com/kowalskihubert",
+                                        "https://www.linkedin.com/in/hubert-kowalski-1b19bb1a3"), 
+                       align = 'center'),
+                column(4, intro_columns("./photos/Mateusz.jpg", 
+                                        "Mateusz Król", 
+                                        "Krótki opis",
+                                        "https://github.com/mkrol11",
+                                        "https://www.linkedin.com/in/mateusz-król-1a6a38265"), 
+                       align = 'center')
+              ),
+              fluidRow(
+                column(1)
+            )
       ),
       tabItem(tabName = "silka",
               fluidRow(
