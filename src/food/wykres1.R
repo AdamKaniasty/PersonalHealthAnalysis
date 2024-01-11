@@ -2,7 +2,7 @@ library(shiny)
 library(dplyr)
 library(tidyr)
 
-df <- read.csv("C:\\Users\\11mat\\Desktop\\Podsumowanie-żywienia-2024-01-02-do-2024-01-09.csv")
+df <- read.csv("./data/food/Podsumowanie-żywienia-2024-01-02-do-2024-01-09.csv")
 
 foodPlot <- function(params){
 
