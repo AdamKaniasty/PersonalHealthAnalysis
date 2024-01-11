@@ -169,7 +169,7 @@ sleeptime %>%
 
 ## Emotions and mood during the week
 # Prepare data
-daylio <- read.csv("./data/daylio-export/daylio-export.csv", header = TRUE)
+daylio <- read.csv("./data/daylio-export-H2.csv", header = TRUE)
 
 # Create a column indicating if there was stress value in activities column
 act <- daylio$activities

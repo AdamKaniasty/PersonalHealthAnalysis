@@ -25,17 +25,20 @@ ui <- fluidPage(
                           )
                       )
              ),
-             tabPanel("Page 2",
+             tabPanel("Sen",
                       fluidRow(
                         column(12,
-                               h2("Sen"))
+                          source("./ui/sleep.R")
                       )
+                  )
              ),
-             tabPanel("Page 3",
+             tabPanel("Nastrój",
                       fluidRow(
                         column(12,
-                               h2("Nastrój"))
+                          source("./ui/mood.R")
                       )
              )
   )
 )
+)
+

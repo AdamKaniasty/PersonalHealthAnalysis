@@ -8,7 +8,7 @@ library(chron)
 ## Preparing the data
 
 # File paths
-input_file <- "./data/sleep-export/sleep-export.csv"
+input_file <- "./data/sleep-export/sleep-export-H2.csv"
 
 # Open the file for reading
 con <- file(input_file, "r")
