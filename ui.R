@@ -28,7 +28,16 @@ ui <- dashboardPage(
     )
   ),
   dashboardBody(
-    tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
+    tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+              tags$style(
+                HTML(".img-circle {
+              border-radius: 50%;
+              width: 150px; 
+              height: 150px; 
+              object-fit: cover;
+                }
+              ")
+            )),
     tabItems(
       tabItem(tabName = "main",
               fluidRow(
