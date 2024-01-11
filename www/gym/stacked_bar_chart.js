@@ -93,7 +93,6 @@ r2d3.onRender(function (data, svg, width, height, options) {
 		.style("fill", "#fff")
 		.style("font-size", "10px");
 
-	// Tooltip
 	var tooltip = d3
 		.select("body")
 		.append("div")
