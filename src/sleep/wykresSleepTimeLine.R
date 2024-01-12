@@ -149,5 +149,6 @@ sleeptimerm %>%
   geom_point(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667), size = 4, color = "green4") +
   geom_line(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667), size = 1.5, color = "green4") -> sleeptime_plot
 
+
 return (sleeptime_plot)
 }
