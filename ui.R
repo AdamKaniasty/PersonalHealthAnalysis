@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+source("./intro/intro.R")
 
 ui <- dashboardPage(
   dashboardHeader(title = "Ja"),
@@ -8,8 +9,9 @@ ui <- dashboardPage(
       id = "sidebar",
       menuItem("Main Page", tabName = "main", icon = icon("dashboard")),
       menuItem("Siłka", tabName = "silka", icon = icon("weight")),
-      menuItem("Sen", tabName = "sleep", icon = icon("bed")),
-      menuItem("Nastrój", tabName = "mood", icon = icon("smile")),
+      menuItem("Sleep", tabName = "sleep", icon = icon("bed")),
+      menuItem("Emotions", tabName = "mood", icon = icon("smile")),
+      menuItem("Nutrition", tabName = "food", icon = icon("utensils")),
       
       conditionalPanel(
         condition = "input.sidebar == 'silka'",
@@ -26,14 +28,45 @@ ui <- dashboardPage(
     )
   ),
   dashboardBody(
-    tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css")),
+    tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "styles.css"),
+              tags$style(
+                HTML(".img-circle {
+              border-radius: 50%;
+              width: 150px; 
+              height: 150px; 
+              object-fit: cover;
+                }
+              ")
+            )),
     tabItems(
       tabItem(tabName = "main",
               fluidRow(
-                column(4, h2("Section 1")),
-                column(4, h2("Section 2")),
-                column(4, h2("Section 3"))
-              )
+                column(12, align = 'center',
+                       "Tu na górze będą informacje o projekcie i użytych bibliotekach, oczywiście odpowiednio wystylowane")
+              ),
+              fluidRow(
+                column(4, intro_columns("./photos/Adam.jpg", 
+                                        "Adam Kaniasty", 
+                                        "Krótki opis",
+                                        "https://github.com/AdamKaniasty",
+                                        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), 
+                       align = 'center'),
+                column(4, intro_columns("./photos/Hubert.jpg", 
+                                        "Hubert Kowalski", 
+                                        "Krótki opis",
+                                        "https://github.com/kowalskihubert",
+                                        "https://www.linkedin.com/in/hubert-kowalski-1b19bb1a3"), 
+                       align = 'center'),
+                column(4, intro_columns("./photos/Mateusz.jpg", 
+                                        "Mateusz Król", 
+                                        "Krótki opis",
+                                        "https://github.com/mkrol11",
+                                        "https://www.linkedin.com/in/mateusz-król-1a6a38265"), 
+                       align = 'center')
+              ),
+              fluidRow(
+                column(1)
+            )
       ),
       tabItem(tabName = "silka",
               fluidRow(
@@ -53,7 +86,12 @@ ui <- dashboardPage(
                 column(12, source("./ui/mood.R", local = TRUE)
                        )
               )
-      )
+      ),
+      tabItem(tabName = "food",
+              fluidRow(
+                column(12, 
+                       source("./ui/food.R", local = TRUE))
+              ))
     )
   ),
   skin = "purple"
