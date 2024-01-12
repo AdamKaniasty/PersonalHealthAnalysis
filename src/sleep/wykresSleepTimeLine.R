@@ -5,7 +5,7 @@ library(ggthemr)
 library(htmltools)
 library(chron)
 
-## Preparing the data
+## Preprocesing data from csv
 
 # File paths
 input_file <- "./data/sleep/sleep-export/sleep-export-H2.csv"
@@ -149,5 +149,36 @@ sleeptimerm %>%
   geom_point(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667), size = 4, color = "green4") +
   geom_line(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667), size = 1.5, color = "green4") -> sleeptime_plot
 
+# Corrected
+sleeptimerm %>%
+  ggplot(aes(x = Date, y = TimeN - 0.04166667)) +
+  geom_line(aes(color = "Hubert"), size = 1.5) + 
+  geom_point(aes(color = "Hubert"), size = 4) + 
+  geom_line(data = sleeptimeA, aes(x = Date, y = TimeN - 0.04166667, color = "Adam"), size = 1.5) +
+  geom_point(data = sleeptimeA, aes(x = Date, y = TimeN - 0.04166667, color = "Adam"), size = 4) +
+  geom_line(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667, color = "Mateusz"), size = 1.5) +
+  geom_point(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667, color = "Mateusz"), size = 4) +
+  scale_color_manual(
+    name = "Person",
+    values = c("Mateusz" = "green4", "Adam" = "red3", "Hubert" = "navy")
+    ) +
+  theme(
+    plot.title = element_text(size = 20, hjust = 0.5),
+    axis.text.x = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 14),
+    axis.text.y = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 14),
+    axis.title = element_text(size = 16),
+    panel.grid.major.x = element_blank(),
+    panel.background = element_rect(fill = "white")
+  ) + 
+  labs(
+    title = "Time of going to sleep each day",
+    x = "Date",
+    y = "Time of going to sleep"
+  ) +
+  scale_y_chron(
+    format = "%H:%M"
+  ) -> sleeptime_plot
+
+sleeptime_plot
 return (sleeptime_plot)
 }

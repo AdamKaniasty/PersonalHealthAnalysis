@@ -8,8 +8,8 @@ ui <- dashboardPage(
       id = "sidebar",
       menuItem("Main Page", tabName = "main", icon = icon("dashboard")),
       menuItem("Siłka", tabName = "silka", icon = icon("weight")),
-      menuItem("Page 2", tabName = "page2", icon = icon("bed")),
-      menuItem("Page 3", tabName = "page3", icon = icon("smile")),
+      menuItem("Sen", tabName = "sleep", icon = icon("bed")),
+      menuItem("Nastrój", tabName = "mood", icon = icon("smile")),
       
       conditionalPanel(
         condition = "input.sidebar == 'silka'",
@@ -42,14 +42,16 @@ ui <- dashboardPage(
                 )
               )
       ),
-      tabItem(tabName = "page2",
+      tabItem(tabName = "sleep",
               fluidRow(
-                column(12, h2("Sen"))
+                column(12, source("./ui/sleep.R", local = TRUE)
+                       )
               )
       ),
-      tabItem(tabName = "page3",
+      tabItem(tabName = "mood",
               fluidRow(
-                column(12, h2("Nastrój"))
+                column(12, source("./ui/mood.R", local = TRUE)
+                       )
               )
       )
     )
