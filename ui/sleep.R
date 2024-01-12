@@ -1,6 +1,8 @@
 library(plotly)
 library(shinyjqui)
 
+generate_sleep_ui <- function() {
+  
 sleepUI <- fluidPage(
   titlePanel("Analiza jakości i długości snu"),
   sidebarLayout(
@@ -20,3 +22,5 @@ sleepUI <- fluidPage(
 )
 
 return(sleepUI)
+
+}

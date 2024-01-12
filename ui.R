@@ -1,6 +1,8 @@
 library(shiny)
 library(shinydashboard)
 source("./intro/intro.R")
+source("./ui/sleep.R")
+source("./ui/mood.R")
 
 ui <- dashboardPage(
   dashboardHeader(title = "Ja"),
@@ -77,13 +79,13 @@ ui <- dashboardPage(
       ),
       tabItem(tabName = "sleep",
               fluidRow(
-                column(12, source("./ui/sleep.R", local = TRUE)
+                column(12, generate_sleep_ui()
                        )
               )
       ),
       tabItem(tabName = "mood",
               fluidRow(
-                column(12, source("./ui/mood.R", local = TRUE)
+                column(12, generate_mood_ui()
                        )
               )
       ),
