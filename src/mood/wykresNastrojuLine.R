@@ -1,4 +1,4 @@
-library(dbplyr)
+library(dplyr)
 library(ggplot2)
 
 daylio <- read.csv("./data/mood/daylio-export-H2.csv", header = TRUE)

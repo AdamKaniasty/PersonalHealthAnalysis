@@ -16,7 +16,7 @@ sleepUI <- fluidPage(
       width = 3
     ),
     mainPanel(
-      shinyjqui::jqui_resizable(plotOutput("sleeptimePlot")),
+      shinyjqui::jqui_resizable(plotlyOutput("sleeptimePlot")),
       width = 9)
   )
 )

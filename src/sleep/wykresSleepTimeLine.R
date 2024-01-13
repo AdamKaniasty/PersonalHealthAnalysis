@@ -59,10 +59,11 @@ close(con)
 
 
 
+
 # Main function returning the plot
 sleeptimeLine <- function(startDate, endDate) {
 
-# Format dates and times
+# Format dates and times  - preparing only for this plot
 for (i in 1:length(data_list)) {
   data_list[[paste0("sd", i)]] <- data_list[[paste0("sd", i)]] %>%
     select(-Event) %>%
@@ -70,9 +71,7 @@ for (i in 1:length(data_list)) {
   
   data_list[[paste0("sd", i)]]$To <- as.POSIXct(data_list[[paste0("sd", i)]]$To, format = "%d. %m. %Y %H:%M")
   data_list[[paste0("sd", i)]]$From <- as.POSIXct(data_list[[paste0("sd", i)]]$From, format = "%d. %m. %Y %H:%M")
-  # Format Value to numeric
   data_list[[paste0("sd", i)]]$Value <- as.numeric(data_list[[paste0("sd", i)]]$Value)
-  
   data_list[[paste0("sd", i)]]$Time <- format(as.POSIXct(data_list[[paste0("sd", i)]]$Time, format = "%H:%M"), format = "%H:%M")
 }
 
@@ -97,20 +96,26 @@ sleeptime$TimeN <- as.numeric(sleeptime$Time)
 
 # Remove duplicated dates in sleeptime, taking the first one
 sleeptime %>% 
-  distinct(Date, .keep_all = TRUE) -> sleeptimerm
+  distinct(Date, .keep_all = TRUE) -> sleeptimeH
 
-sleeptimerm[19, "TimeN"] <- 0.0
-sleeptimerm[19,"Time"] <- chron::as.times(0.0)
-  
+sleeptimeH[19, "TimeN"] <- 0.0
+sleeptimeH[19,"Time"] <- chron::as.times(0.0)
+sleeptimeH$TimeP <- as.POSIXct(as.character(sleeptimeH$Time), format = "%H:%M:%S")
 
 sleeptimeA <- read.csv("./data/sleep/sleep-export/sleeptime-A.csv", sep = ";")
 sleeptimeA$Date <- as.Date(sleeptimeA$Date, format = "%Y-%m-%d")
+sleeptimeA$Time <- times(format(as.POSIXct(sleeptimeA$Time, format = "%H:%M:%S"), format = "%H:%M:%S"))
+sleeptimeA$TimeP <- as.POSIXct(as.character(sleeptimeA$Time), format = "%H:%M:%S")
+
 sleeptimeM <- read.csv("./data/sleep/sleep-export/sleeptime-M.csv", sep = ";")
 sleeptimeM$Date <- as.Date(sleeptimeM$Date, format = "%Y-%m-%d")
+sleeptimeM$Time <- times(format(as.POSIXct(sleeptimeM$Time, format = "%H:%M:%S"), format = "%H:%M:%S"))
+sleeptimeM$TimeP <- as.POSIXct(as.character(sleeptimeM$Time), format = "%H:%M:%S")
+
 
 # Filtering dates
-sleeptimerm %>% 
-  filter(Date >= startDate & Date <= endDate) -> sleeptimerm
+sleeptimeH %>% 
+  filter(Date >= startDate & Date <= endDate) -> sleeptimeH
 
 sleeptimeA %>%
   filter(Date >= startDate & Date <= endDate) -> sleeptimeA
@@ -118,67 +123,137 @@ sleeptimeA %>%
 sleeptimeM %>%
   filter(Date >= startDate & Date <= endDate) -> sleeptimeM
 
-# Line plot
-sleeptimerm %>%
-  ggplot(aes(x = Date, y = TimeN - 0.04166667, color = TimeN)) +
-  geom_line(size = 1.5) + 
-  geom_point(size = 4) + 
-  theme(
-    plot.title = element_text(size = 20, hjust = 0.5),
-    axis.text.x = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 14),
-    axis.text.y = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 14),
-    axis.title = element_text(size = 16),
-    panel.grid.major.x = element_blank(),
-    legend.position = "none",
-    panel.background = element_rect(fill = "white")
-  ) + 
-  labs(
-    title = "Time of going to sleep each day",
-    x = "Date",
-    y = "Time of going to sleep"
-  ) +
-  scale_y_chron(
-    format = "%H:%M"
-  ) + 
-  scale_color_gradient(
-    low = "dodgerblue", # lighter blue 
-    high = "navy", # navy 
-  ) +
-  geom_point(data = sleeptimeA, aes(x = Date, y = TimeN - 0.04166667), size = 4, color = "red3") +
-  geom_line(data = sleeptimeA, aes(x = Date, y = TimeN - 0.04166667), size = 1.5, color = "red3") +
-  geom_point(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667), size = 4, color = "green4") +
-  geom_line(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667), size = 1.5, color = "green4") -> sleeptime_plot
+# Line plot - static
+# sleeptimeH %>%
+#   ggplot(aes(x = Date, y = TimeN - 0.04166667)) +
+#   geom_line(aes(color = "Hubert"), size = 1.5) + 
+#   geom_point(aes(color = "Hubert"), size = 4) + 
+#   geom_line(data = sleeptimeA, aes(x = Date, y = TimeN - 0.04166667, color = "Adam"), size = 1.5) +
+#   geom_point(data = sleeptimeA, aes(x = Date, y = TimeN - 0.04166667, color = "Adam"), size = 4) +
+#   geom_line(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667, color = "Mateusz"), size = 1.5) +
+#   geom_point(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667, color = "Mateusz"), size = 4) +
+#   scale_color_manual(
+#     name = "Person",
+#     values = c("Mateusz" = "green4", "Adam" = "red3", "Hubert" = "navy")
+#     ) +
+#   theme(
+#     plot.title = element_text(size = 20, hjust = 0.5),
+#     axis.text.x = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 14),
+#     axis.text.y = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 14),
+#     axis.title = element_text(size = 16),
+#     panel.grid.major.x = element_blank(),
+#     panel.background = element_rect(fill = "white"),
+#     legend.position = "bottom",
+#     legend.box = "vertical",
+#     legend.key = element_rect(fill = "white")
+#   ) + 
+#   labs(
+#     title = "Time of going to sleep each day",
+#     x = "Date",
+#     y = "Time of going to sleep"
+#   ) +
+#   scale_y_chron(
+#     format = "%H:%M"
+#   ) -> sleeptime_plot
 
-# Corrected
-sleeptimerm %>%
-  ggplot(aes(x = Date, y = TimeN - 0.04166667)) +
-  geom_line(aes(color = "Hubert"), size = 1.5) + 
-  geom_point(aes(color = "Hubert"), size = 4) + 
-  geom_line(data = sleeptimeA, aes(x = Date, y = TimeN - 0.04166667, color = "Adam"), size = 1.5) +
-  geom_point(data = sleeptimeA, aes(x = Date, y = TimeN - 0.04166667, color = "Adam"), size = 4) +
-  geom_line(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667, color = "Mateusz"), size = 1.5) +
-  geom_point(data = sleeptimeM, aes(x = Date, y = TimeN - 0.04166667, color = "Mateusz"), size = 4) +
-  scale_color_manual(
-    name = "Person",
-    values = c("Mateusz" = "green4", "Adam" = "red3", "Hubert" = "navy")
-    ) +
-  theme(
-    plot.title = element_text(size = 20, hjust = 0.5),
-    axis.text.x = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 14),
-    axis.text.y = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 14),
-    axis.title = element_text(size = 16),
-    panel.grid.major.x = element_blank(),
-    panel.background = element_rect(fill = "white")
-  ) + 
-  labs(
-    title = "Time of going to sleep each day",
-    x = "Date",
-    y = "Time of going to sleep"
-  ) +
-  scale_y_chron(
-    format = "%H:%M"
-  ) -> sleeptime_plot
 
-sleeptime_plot
-return (sleeptime_plot)
+# Line plot in plotly
+
+sleeptime_plotly <- plot_ly() %>%
+  add_trace(
+    data = sleeptimeH,
+    name = "Hubert",
+    type = "scatter",
+    mode = "markers+lines",
+    x = ~Date,
+    y = ~TimeP,
+    hoverinfo = "text",
+    text = paste(
+      "<b>", "Date: ","</b>", sleeptimeH$Date, "<br>",
+      "<b>", "Time to bed: ","</b>", sleeptimeH$Time
+    ),
+    hovertemplate = paste(
+      "%{text}",
+      "<extra><b>Hubert</b></extra>"
+    ),
+    showlegend = TRUE,
+    marker = list(color = 'rgb(13, 57, 162)', size = 8),
+    line = list(color = 'rgb(13, 57, 162)', width = 4, shape = "spline")
+  ) %>%
+  add_trace(
+    data = sleeptimeA,
+    name = "Adam",
+    type = "scatter",
+    mode = "markers+lines",
+    x = ~Date,
+    y = ~TimeP,
+    hoverinfo = "text",
+    text = paste(
+      "<b>", "Date: ","</b>", sleeptimeA$Date, "<br>",
+      "<b>", "Time to bed: ","</b>", sleeptimeA$Time
+    ),
+    hovertemplate = paste(
+      "%{text}",
+      "<extra><b>Adam</b></extra>"
+    ),
+    showlegend = TRUE,
+    marker = list(color = 'rgb(205, 12, 24)', size = 8),
+    line = list(color = 'rgb(205, 12, 24)', width = 4, shape = "spline")
+  ) %>%
+  add_trace(
+    data = sleeptimeM,
+    name = "Mateusz",
+    type = "scatter",
+    mode = "markers+lines",
+    x = ~Date,
+    y = ~TimeP,
+    hoverinfo = "text",
+    text = paste(
+      "<b>", "Date: ","</b>", sleeptimeM$Date, "<br>",
+      "<b>", "Time to bed: ","</b>", sleeptimeM$Time
+    ),
+    hovertemplate = paste(
+      "%{text}",
+      "<extra><b>Mateusz</b></extra>"
+    ),
+    showlegend = TRUE,
+    marker = list(color = 'rgb(0, 135, 45)', size = 8),
+    line = list(color = 'rgb(0, 135, 45)', width = 4, shape = "spline")
+  )
+
+# Legend styling 
+leg <- list(
+  orientation = "h",
+  x = 0.5,
+  y = -0.2,
+  xanchor = "center",
+  font = list(
+    family = "sans-serif",
+    size = 14,
+    color = "#000"),
+  bgcolor = "#FFFFFF",
+  bordercolor = "#FFFFFF"
+  )
+
+margin <- list(autoexpand = TRUE,
+               l = 30,
+               r = 20,
+               t = 50,
+               b = 20)
+
+sleeptime_plotly <- sleeptime_plotly %>%
+  layout(
+    title = "Time of going to sleep each day",
+    xaxis = list(title = "Date"),
+    yaxis = list(title = "Time of going to sleep", 
+                 zeroline = FALSE, 
+                 #range = c(-0.004,0.21),
+                 type = "time",
+                 tickformat = "%H:%M"
+                 ),
+    legend = leg,
+    margin = margin
+  )
+
+return (sleeptime_plotly)
 }

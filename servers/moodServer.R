@@ -1,6 +1,7 @@
 
 source("./src/mood/wykresNastrojuLolipop.R")
 source("./src/mood/wykresNastrojuLine.R")
+source("./src/mood/wykresEmocjiGraf.R")
 
 moodLogic <- function(input, output, session) {
   
@@ -13,6 +14,10 @@ moodLogic <- function(input, output, session) {
     } else if (input$chartType == "Line") {
       moodLine(startDate, endDate)
     }
+  })
+  
+  output$emotionsPlot <- renderD3({
+    emotionsGraph()
   })
   
   
