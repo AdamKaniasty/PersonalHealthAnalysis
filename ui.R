@@ -15,6 +15,7 @@ ui <- dashboardPage(
       menuItem("Emotions", tabName = "mood", icon = icon("smile")),
       menuItem("Nutrition", tabName = "food", icon = icon("utensils")),
       
+      # Conditional for silka page
       conditionalPanel(
         condition = "input.sidebar == 'silka'",
         checkboxGroupInput("variables", "Variables to Display:", 
@@ -26,7 +27,36 @@ ui <- dashboardPage(
           choices = c(7, 31, 10000),
           selected = 7
         )
+      ),
+      
+      # Conditional for mood page
+      conditionalPanel(
+        condition = "input.sidebar == 'mood'",
+        dateRangeInput(
+          "dateRange",
+          "Wybierz zakres dat:",
+          start = "2023-12-12",
+          end = "2024-01-07",
+        ),
+        radioButtons(
+          "chartType",
+          "Wybierz typ wykresu:",
+          choices = c("Lollipop", "Line"),
+          selected = "Lollipop"
+        )
+      ),
+      
+      # Conditional for sleep page
+      conditionalPanel(
+        condition = "input.sidebar == 'sleep'",
+        dateRangeInput(
+          "dateRangeSleep",
+          "Wybierz zakres dat:",
+          start = "2023-12-12",
+          end = "2024-01-07",
+        )
       )
+      
     )
   ),
   dashboardBody(
@@ -38,6 +68,18 @@ ui <- dashboardPage(
               height: 150px; 
               object-fit: cover;
                 }
+              .box.box-solid.box-primary>.box-header {
+                color:#fff;
+                background:#605ca8;
+                
+              }
+              .box.box-solid.box-primary{
+                border-bottom-color:#605ca8;
+                border-left-color:#605ca8;
+                border-right-color:#605ca8;
+                border-top-color:#605ca8;
+                             
+    }
               ")
             )),
     tabItems(

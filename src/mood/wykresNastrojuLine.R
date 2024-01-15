@@ -66,7 +66,7 @@ daylio_moods_line %>%
   ) + 
   scale_y_continuous(
     breaks = c(1.0, 2.0, 3.0, 4.0, 5.0),
-    labels = c("okropnie", "źle", "tak sobie", "dobrze", "wspaniale"),
+    labels = c("terrible", "bad", "so-so", "good", "fantastic"),
     limits = c(1,5.5)
   ) +
   scale_color_gradientn(

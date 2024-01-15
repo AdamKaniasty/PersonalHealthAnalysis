@@ -2,6 +2,7 @@
 source("./src/mood/wykresNastrojuLolipop.R")
 source("./src/mood/wykresNastrojuLine.R")
 source("./src/mood/wykresEmocjiGraf.R")
+source("./src/mood/wykresCzynnosciGraf.R")
 
 moodLogic <- function(input, output, session) {
   
@@ -18,6 +19,10 @@ moodLogic <- function(input, output, session) {
   
   output$emotionsPlot <- renderD3({
     emotionsGraph()
+  })
+  
+  output$activitiesPlot <- renderD3({
+    activGraph()
   })
   
   

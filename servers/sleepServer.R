@@ -1,4 +1,5 @@
 source("./src/sleep/wykresSleepTimeLine.R")
+source("./src/sleep/wykresActigraph.R")
 
 sleepLogic <- function(input, output, session) {
   
@@ -8,6 +9,11 @@ sleepLogic <- function(input, output, session) {
   
     sleeptimeLine(startDate, endDate)
     
+  })
+  
+  output$actigraphPlot <- renderPlotly({
+    dateActi <- as.Date(input$dateActigraph)
+    actigraphPlot(dateActi, "Hubert") # Tu będzie podawany user, trzeba wtedy w funkcji actigraphPlot go uwzględnić
   })
   
   

@@ -9,8 +9,8 @@ moodLollipop <- function(startDate, endDate) {
 
 # Mapping moods to integers:
 map_mood <- data.frame(
-  mood = c("wspaniale", "dobrze", "tak sobie", "źle", "okropnie"),
-  value = c(5, 4, 3, 2, 1)
+  mood = c("okropnie", "źle", "tak sobie", "dobrze", "wspaniale"),
+  value = c(1,2,3,4,5)
 )
 
 daylio_moods <- merge(daylio, map_mood, by = "mood")
@@ -62,7 +62,7 @@ daylio_moods %>%
   ) + 
   scale_y_continuous(
     breaks = c(1, 2, 3, 4, 5),
-    labels = c("okropnie", "źle", "tak sobie", "dobrze", "wspaniale"),
+    labels = c("terrible", "bad", "so-so", "good", "fantastic"),
     limits = c(1,5.5)
   ) + 
   scale_color_gradientn(

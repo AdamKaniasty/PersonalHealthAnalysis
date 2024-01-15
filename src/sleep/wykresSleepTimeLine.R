@@ -55,14 +55,6 @@ if (!is.null(current_data)) {
 # Close the file
 close(con)
 
-
-
-
-
-
-# Main function returning the plot
-sleeptimeLine <- function(startDate, endDate) {
-
 # Format dates and times  - preparing only for this plot
 for (i in 1:length(data_list)) {
   data_list[[paste0("sd", i)]] <- data_list[[paste0("sd", i)]] %>%
@@ -74,6 +66,11 @@ for (i in 1:length(data_list)) {
   data_list[[paste0("sd", i)]]$Value <- as.numeric(data_list[[paste0("sd", i)]]$Value)
   data_list[[paste0("sd", i)]]$Time <- format(as.POSIXct(data_list[[paste0("sd", i)]]$Time, format = "%H:%M"), format = "%H:%M")
 }
+
+
+
+# Main function returning the plot
+sleeptimeLine <- function(startDate, endDate) {
 
 sleeptime <- data_list[[1]] %>%
   select(From) %>%
