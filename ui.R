@@ -3,6 +3,7 @@ library(shinydashboard)
 source("./intro/intro.R")
 source("./ui/sleep.R")
 source("./ui/mood.R")
+source("./ui/food.R")
 
 ui <- dashboardPage(
   dashboardHeader(title = "Ja"),
@@ -55,6 +56,15 @@ ui <- dashboardPage(
           start = "2023-12-12",
           end = "2024-01-07",
         )
+      ),
+      
+      # Conditional for nutrition page
+      conditionalPanel(
+        condition = "input.sidebar == 'food'",
+        selectInput("showModeFood",
+                    "Select style of chart",
+                    list("Lines and markers", "Bars"),
+                    selected = "Lines and markers")
       )
       
     )
@@ -133,9 +143,9 @@ ui <- dashboardPage(
       ),
       tabItem(tabName = "food",
               fluidRow(
-                column(12, 
-                       source("./ui/food.R", local = TRUE))
-              ))
+                column(12, generate_nutrition_ui())
+              )
+      )
     )
   ),
   skin = "purple"
