@@ -2,11 +2,9 @@ library(shiny)
 library(dplyr)
 library(tidyr)
 
-df <- read.csv("./data/food/Podsumowanie-żywienia-2024-01-02-do-2024-01-09.csv")
+foodPlot <- function(datasource, params, showmode){
 
-foodPlot <- function(params){
-
-  daily_calories <- df %>%
+  daily_calories <- read.csv(datasource) %>%
     group_by(Data) %>%
     summarize(total_calories = sum(Kalorie),
                 total_fats = sum(Tłuszcze..g.),
@@ -15,19 +13,64 @@ foodPlot <- function(params){
                 total_sugar = sum(Cukier),
                 num_meals = n())
     
-    
-  fig <- plot_ly(daily_calories, x = ~Data, y = ~total_fats, name = 'Tłuszcze', type = 'scatter', mode = 'lines+markers') %>% 
-    layout(title = 'Dzienne spożycie mikroskładników', 
-             xaxis = list(title = 'Data'), 
-             yaxis = list(title = 'Dzienne spożycie (w gramach)'))
-  if ("Węglowodany" %in% params == TRUE) {
-    fig <- fig %>% add_trace(y = ~total_carbs, name = 'Węglowodany', mode = 'lines+markers')
+  if (showmode == 'Lines and markers') {
+    fig <- plot_ly(daily_calories, type = 'scatter') 
+    }  else {
+    fig <- plot_ly(daily_calories)
+  }
+  
+  if ("Fats" %in% params == TRUE) {
+    fig <- fig %>% add_trace(x = ~Data, y = ~mean(total_fats),
+                             type = 'scatter',
+                             name = 'Fat mean', 
+                             mode = 'lines',
+                             line = list(color = 'gold'))
+  }
+  if ("Carbohydrates" %in% params == TRUE) {
+    fig <- fig %>% add_trace(x = ~Data, y = ~mean(total_carbs), 
+                             type = 'scatter',
+                             name = 'Carb. mean', 
+                             mode = 'lines',
+                             line = list(color = 'darkturquoise'))
   }  
-  if ("Białka" %in% params == TRUE) {
-    fig <- fig %>% add_trace(y = ~total_protein, name = 'Białka', mode = 'lines+markers')
+  if ("Protein" %in% params == TRUE) {
+    fig <- fig %>% add_trace(x = ~Data, y = ~mean(total_protein), 
+                             type = 'scatter',
+                             name = 'Protein mean', 
+                             mode = 'lines',
+                             line = list(color = 'lightcoral'))
   }
-  if ("Cukry" %in% params == TRUE) {
-    fig <- fig %>% add_trace(y = ~total_sugar, name = 'Cukry', mode = 'lines+markers') 
+  if ("Sugar" %in% params == TRUE) {
+    fig <- fig %>% add_trace(x = ~Data, y = ~mean(total_sugar),
+                             type = 'scatter',
+                             name = 'Sugar mean', 
+                             mode = 'lines',
+                             line = list(color = 'lightslategrey')) 
   }
+  
+  fig <- fig %>% layout(title = 'Daily intake of selected macroelements', 
+                      xaxis = list(title = 'Date'), 
+                      yaxis = list(title = 'Daily intake (grams)')) %>%
+    add_trace(x = ~Data, y = ~total_fats, 
+              name = 'Fats', 
+              mode = 'lines+markers',
+              line = list(color = 'orange', shape = 'spline'),
+              marker = list(color = 'orange')) %>% 
+    add_trace(x = ~Data, y = ~total_carbs, 
+              name = 'Carbohydrates', 
+              mode = 'lines+markers', 
+              line = list(color = 'blue', shape = 'spline'),
+              marker = list(color = 'blue')) %>%
+    add_trace(x = ~Data, y = ~total_protein, 
+              name = 'Protein', 
+              mode = 'lines+markers', 
+              line = list(color = 'red', shape = 'spline'),
+              marker = list(color = 'red')) %>%
+    add_trace(x = ~Data, y = ~total_sugar, 
+              name = 'Sugar', 
+              mode = 'lines+markers',
+              line = list(color = 'black', shape = 'spline'),
+              marker = list(color = 'black'))
+
   return(fig)
 }
