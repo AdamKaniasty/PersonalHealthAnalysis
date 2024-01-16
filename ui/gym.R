@@ -10,22 +10,95 @@ gymUI <- fluidRow(
 
 gymUI <- tagList(gymUI, 
                  fluidRow(
-                   column(6,plotlyOutput("gym_spider")),
-                   column(6, plotlyOutput("gym_weight_distribution"))
+                   box(
+                     title = "Bedtime line plot",
+                     status = "primary",
+                     solidHeader = TRUE,
+                     collapsible = FALSE,
+                     width = 6,
+                     class = 'box-calc',
+                     fluidRow(
+                       box(
+                         title = "Total sets",
+                         status = "primary",
+                         solidHeader = TRUE,
+                         collapsible = FALSE,
+                         width = 6,
+                         class = 'box-calc-item',
+                         verbatimTextOutput("total_sets")
+                       ),
+                       box(
+                         title = "Total sets",
+                         status = "primary",
+                         solidHeader = TRUE,
+                         collapsible = FALSE,
+                         width = 6,
+                         verbatimTextOutput("total_duration")
+                       ),  
+                     ),
+                     fluidRow(
+                       box(
+                         title = "Total sets",
+                         status = "primary",
+                         solidHeader = TRUE,
+                         collapsible = FALSE,
+                         width = 6,
+                         verbatimTextOutput("number_of_workouts")
+                       ),
+                       box(
+                         title = "Total sets",
+                         status = "primary",
+                         solidHeader = TRUE,
+                         collapsible = FALSE,
+                         width = 6,
+                         verbatimTextOutput("total_volume")
+                       )
+                     )
+                   ),
+                   box(
+                     title = "Bedtime line plot",
+                     status = "primary",
+                     solidHeader = TRUE,
+                     collapsible = FALSE,
+                     width = 6,
+                     plotlyOutput("gym_weight_distribution")
+                   ),
                  ))
 
 gymUI <- tagList(gymUI,
                  fluidRow(
-                   column(6,
-                          imageOutput("gym_muscles")),
-                   column(6, 
-                          h4("Information about Plot 3"),
-                          verbatimTextOutput("text1"))
-                 ))
+                   box(
+                    title = "Bedtime line plot",
+                    status = "primary",
+                    solidHeader = TRUE,
+                    collapsible = FALSE,
+                    width = 12,
+                    fluidRow(
+                      column(4,
+                             imageOutput("gym_muscles")
+                      ),
+                      column(4,
+                             plotlyOutput("gym_spider")
+                      ),
+                      column(3, 
+                             h4("Information about Plot 3"),
+                             verbatimTextOutput("text1")
+                      )
+                    )
+                    )
+  )
+)
 
 gymUI <- tagList(gymUI,
                  fluidRow(
+                   box(
+                     title = "Bedtime line plot",
+                     status = "primary",
+                     solidHeader = TRUE,
+                     collapsible = FALSE,
+                     width = 12,
                    column(12, d3Output("stacked_progress")),
+                   )
                  ))
 
 gymUI

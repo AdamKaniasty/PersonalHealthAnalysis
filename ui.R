@@ -27,6 +27,12 @@ ui <- dashboardPage(
           "Select Date",
           choices = c(7, 31, 10000),
           selected = 7
+        ),
+        dateRangeInput(
+          "dateRangeGym",
+          "Wybierz zakres dat:",
+          start = "2023-12-12",
+          end = "2024-01-07",
         )
       ),
       

@@ -11,6 +11,7 @@ source("./src/gym/spider.R")
 source("./src/gym/muscles/muscles.R")
 source("./src/gym/weightMusclesDistribution.R")
 source("./src/gym/progress.R")
+source("./src/gym/Calculations.R")
 
 gymLogic <- function(input, output, session) {
   
@@ -18,18 +19,39 @@ gymLogic <- function(input, output, session) {
     gymSpider(as.numeric(input$spider_date_start))
   })
   
-  #output$gym_progress <- 
-    
   output$gym_weight_distribution <- renderPlotly({
     weightDistribution(input)
   })
-    
-  #output$gym_time-performance <-
+  
+  calculated_values <- reactive({
+    start_date <- input$dateRangeGym[1]
+    end_date <- input$dateRangeGym[2]
+    return(gym_calculations(start_date, end_date))
+  })
+  
+  output$total_sets <- renderText({
+    calculated_values()$total_sets
+  })
+  
+  
+  output$total_duration <- renderText({
+    calculated_values()$total_duration
+  })
+  
+  
+  output$total_volume <- renderText({
+    calculated_values()$total_volume
+  })
+  
+  
+  output$number_of_workouts <- renderText({
+    calculated_values()$number_of_workouts
+  })
   
   output$gym_muscles <- renderImage({
     image <- musclesPlot()
     list(
-      src="./image_composite.png"
+      src="./src/gym/muscles/image_composite.png"
     )
   }, deleteFile = T)
   

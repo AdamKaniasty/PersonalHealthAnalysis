@@ -41,5 +41,5 @@ for (i in 2:length(images)) {
 
 other <- image_read(paste0("./src/gym/muscles/images/other.png"))
 image_composite <- image_composite(composite_image, other, operator = 'over')
-image_write(image_composite, "image_composite.png")
+image_write(image_composite, "./src/gym/muscles/image_composite.png")
 }
