@@ -16,6 +16,7 @@ gymSpider <- function(decrement){
   
   p <- plot_ly() %>%
     add_trace(
+      name = "Overall",
       data = overall_avg,
       type = 'scatterpolar',
       r = ~avg_exercises_count,
@@ -23,10 +24,11 @@ gymSpider <- function(decrement){
       mode = 'lines',
       fill = 'toself',
       fillcolor = "#85b3b7",
-      opacity = 0.5,
-      line = list(color = "#85b3b7", width = 3, dash = 'dot')
+      opacity = 0.3,
+      line = list(color = "#00A8E8", width = 3, dash = 'dot')
     ) %>%
     add_trace(
+      name = "Selected period",
       data = muscle_groups,
       type = 'scatterpolar',
       r = ~exercises_count,
@@ -35,8 +37,18 @@ gymSpider <- function(decrement){
       fill = 'toself',
       fillcolor="#93d79b",
       opacity = 0.7,
-      line = list(color = "#93d79b", width = 5), # More visible lines for individual data
-      marker = list(size = 10)
+      line = list(color = "#00A14F", width = 3), # More visible lines for individual data
+      marker = list(
+        size = 5,
+        color = '#00A14F', # Set marker color to green
+        line = list(
+          color = '#00A14F', # Vibrant green border
+          width = 2 # Thicker border for vibrancy
+        )
+        ),
+      text = ~paste(muscle_group, ": ", exercises_count), # Custom hover text
+      hoverinfo = 'text',
+      hoveron = "points"
     ) %>%
     layout(
       polar = list(
@@ -50,8 +62,11 @@ gymSpider <- function(decrement){
         bgcolor = 'rgba(0,0,0,0)'),
       plot_bgcolor = 'rgba(0,0,0,0)',
       paper_bgcolor = 'rgba(0,0,0,0)',
-      showlegend = F
+      showlegend = T
     )
   
   return(p)
 }
+
+
+gymSpider(31)

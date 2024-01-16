@@ -70,7 +70,6 @@ gymLogic <- function(input, output, session) {
       d3_data <- processed_data %>%
         pivot_wider(names_from = muscle_group, values_from = total_weight) %>%
         replace(is.na(.), 0)
-      print(d3_data)
       r2d3(data = d3_data, script = "www/gym/stacked_bar_chart.js")
   })
 }

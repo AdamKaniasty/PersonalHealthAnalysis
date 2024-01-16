@@ -1,4 +1,7 @@
-r2d3.onRender(function (data, svg, width, height, options) {
+r2d3.onRender(function (data, div, width, height, options) {
+  
+  div.selectAll('*').remove();
+  
 	var margin = { top: 40, right: 10, bottom: 20, left: 50 },
 		plotWidth = width - margin.left - margin.right,
 		plotHeight = height - margin.top - margin.bottom;
@@ -24,7 +27,13 @@ r2d3.onRender(function (data, svg, width, height, options) {
 		.domain([0, d3.max(layers, (layer) => d3.max(layer, (d) => d[1]))])
 		.range([plotHeight, 0]);
 
-	var color = d3.scaleOrdinal(d3.schemeCategory10).domain(seriesNames);
+  var pastel_palette = ['#ffafc4', '#93d79b', '#fcac96', '#85b3b7', '#e6a0b7', '#fcac96'];
+	var color = d3.scaleOrdinal(pastel_palette).domain(seriesNames);
+
+  var svg = div.append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .style("background-color", "transparent");
 
 	var g = svg
 		.append("g")
@@ -63,15 +72,16 @@ r2d3.onRender(function (data, svg, width, height, options) {
 		.attr("class", "axis axis--x")
 		.attr("transform", "translate(0," + plotHeight + ")")
 		.style("font-size", "12px")
-		.style("color", "#4a4a4a")
+		.style("color", "#f4f4f4")
 		.call(d3.axisBottom(x));
 
 	g.append("g")
 		.attr("class", "axis axis--y")
 		.style("font-size", "12px")
-		.style("color", "#4a4a4a")
+		.style("color", "#f4f4f4")
 		.call(d3.axisLeft(y));
 	// Adding Labels to Bars
+	
 	layer
 		.selectAll("text")
 		.data(function (d) {
@@ -93,11 +103,33 @@ r2d3.onRender(function (data, svg, width, height, options) {
 		.style("fill", "#fff")
 		.style("font-size", "10px");
 
+  var legend = svg.selectAll(".legend")
+    .data(seriesNames.slice().reverse())
+    .enter().append("g")
+    .attr("class", "legend")
+    .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+  
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+  
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .style("fill", "#ffffff")
+      .text(function(d) { return d; });
+
+
 	var tooltip = d3
 		.select("body")
 		.append("div")
 		.attr("class", "tooltip")
 		.style("opacity", 0);
+
 
 	rect
 		.on("mouseover", function (event, d) {
@@ -110,4 +142,14 @@ r2d3.onRender(function (data, svg, width, height, options) {
 		.on("mouseout", function (event, d) {
 			tooltip.transition().duration(500).style("opacity", 0);
 		});
+		
+	const shadowHost = document.querySelector('.r2d3');
+  const shadowRoot = shadowHost.shadowRoot;
+
+  if (shadowRoot) {
+    const svgElement = shadowRoot.querySelector('svg');
+    if (svgElement) {
+      svgElement.style.backgroundColor = 'transparent';
+    }
+  }
 });

@@ -73,14 +73,16 @@ gymUI <- tagList(gymUI,
                     solidHeader = TRUE,
                     collapsible = FALSE,
                     width = 12,
+                    class = "row2",
                     fluidRow(
-                      column(4,
+                      column(3,
                              imageOutput("gym_muscles")
                       ),
-                      column(4,
+                      column(7,
+                             class = "spider",
                              plotlyOutput("gym_spider")
                       ),
-                      column(3, 
+                      column(2, 
                              h4("Information about Plot 3"),
                              verbatimTextOutput("text1")
                       )
