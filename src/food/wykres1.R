@@ -83,14 +83,15 @@ caloriePlot <- function(datasource){
     reframe(total_calories = sum(`Kalorie`),
               numdate = as.numeric(as.Date(`Data`)),
               num_meals = n())
-
+  
   fig <- plot_ly(
     daily_calories,
     type = 'barpolar',
     theta = ~numdate*360/(max(daily_calories$numdate) - min(daily_calories$numdate) + 1), #Divides circle to required number of slices
     r = ~total_calories/num_meals,
     hoverinfo = 'text',
-    text = ~paste('Date: ', Data, '<br>Consumed calories: ', total_calories)
+    text = ~paste('Date: ', Data, '<br>Consumed calories: ', total_calories),
+    marker = list(color = ~total_calories, colorscale = "Temps")
   )
   
   fig <- fig %>% layout(
