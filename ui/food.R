@@ -13,6 +13,14 @@ generate_nutrition_ui <- function() {
           solidHeader = TRUE,
           collapsible = FALSE,
           plotlyOutput("foodPlot")
+        ),
+        box(
+          title = "Daily calorie intake",
+          status = "warning",
+          width = 12,
+          solidHeader = TRUE,
+          collapsible = FALSE,
+          plotlyOutput("caloriePlot")
         )
         ),
       sidebarPanel(
@@ -24,7 +32,7 @@ generate_nutrition_ui <- function() {
                     multiple = TRUE),
         
         box(
-          title = "Panel na jakies tam gadanie",
+          title = "Is your body well-fed?",
           status = "warning",
           width = 12,
           solidHeader = TRUE,
