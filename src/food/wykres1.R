@@ -100,7 +100,7 @@ caloriePlot <- function(datasource){
                         range = c(0, 140),
                         tickvals = list(sqrt(250)*2, sqrt(500)*2, sqrt(1000)*2, sqrt(2000)*2, sqrt(4000)*2),
                         ticktext = list('250', '500', '1000', '2000', '4000')), #Now intake is relative to field of slice
-      angularaxis = list(direction = "clockwise")
+      angularaxis = list(direction = "clockwise", rotation = 270)
     ),
     showlegend = FALSE
   )
