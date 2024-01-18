@@ -77,7 +77,7 @@ caloriePlot <- function(datasource){
     reframe(total_calories = sum(`Kalorie`),
               numdate = as.numeric(as.Date(`Data`)),
               num_meals = n(),
-              cal_root = sqrt(total_calories))
+              cal_root = sqrt(total_calories)) #Needed to correctly plot slice fields
   
   daily_calories <- distinct(daily_calories)
   
@@ -87,7 +87,7 @@ caloriePlot <- function(datasource){
     theta = ~numdate*360/(max(daily_calories$numdate) - min(daily_calories$numdate) + 1), #Divides circle to required number of slices
     r = ~cal_root,
     hoverinfo = 'text',
-    text = ~paste('Date: ', Data, '<br>Consumed calories: ', total_calories),
+    text = ~paste('Date: ', Data, '<br>Consumed kcal: ', total_calories),
     marker = list(color = ~total_calories, colorscale = "Temps")
   )
   
