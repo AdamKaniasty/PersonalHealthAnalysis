@@ -67,9 +67,9 @@ ui <- dashboardPage(
       # Conditional for nutrition page
       conditionalPanel(
         condition = "input.sidebar == 'food'",
-        selectInput("showModeFood",
+        radioButtons("showModeFood",
                     "Select style of chart",
-                    list("Lines and markers", "Bars"),
+                    choices = c("Lines and markers", "Bars"),
                     selected = "Lines and markers")
       )
       
