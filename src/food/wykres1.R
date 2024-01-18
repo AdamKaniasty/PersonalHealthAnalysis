@@ -36,41 +36,41 @@ foodPlot <- function(datasource, showmode){
                              type = 'scatter',
                              name = 'Fat mean', 
                              mode = 'lines',
-                             line = list(color = 'rgba(150, 110, 5, 255)')) %>% 
+                             line = list(color = 'rgba(160, 120, 15, 255)')) %>% 
     add_trace(x = ~Data, y = ~mean(total_carbs), 
                              type = 'scatter',
                              name = 'Carb. mean', 
                              mode = 'lines',
-                             line = list(color = 'rgba(25, 10, 220, 255')) %>% 
+                             line = list(color = 'rgba(60, 75, 250, 255')) %>% 
     add_trace(x = ~Data, y = ~mean(total_protein), 
                              type = 'scatter',
                              name = 'Protein mean', 
                              mode = 'lines',
-                             line = list(color = 'rgba(170, 20, 5, 255)')) %>% 
+                             line = list(color = 'rgba(180, 30, 15, 255)')) %>% 
     add_trace(x = ~Data, y = ~mean(total_sugar),
                              type = 'scatter',
                              name = 'Sugar mean', 
                              mode = 'lines',
-                             line = list(color = 'dimgrey'))  %>%
+                             line = list(color = 'rgba(160, 160, 160, 255'))  %>%
     add_trace(x = ~Data, y = ~total_fats, 
               name = 'Fats', 
               mode = 'lines+markers',
-              line = list(color = 'gold', shape = 'spline'),
-              marker = list(color = 'gold')) %>% 
+              line = list(color = 'yellow', shape = 'spline', width = 3),
+              marker = list(color = 'yellow')) %>% 
     add_trace(x = ~Data, y = ~total_carbs, 
               name = 'Carbohydrates', 
               mode = 'lines+markers', 
-              line = list(color = 'darkturquoise', shape = 'spline'),
-              marker = list(color = 'darkturquoise')) %>%
+              line = list(color = 'rgba(0, 220, 255, 255)', shape = 'spline', width = 3),
+              marker = list(color = 'rgba(60, 220, 255, 255)')) %>%
     add_trace(x = ~Data, y = ~total_protein, 
               name = 'Protein', 
               mode = 'lines+markers', 
-              line = list(color = 'rgba(255, 30, 50, 255)', shape = 'spline'),
-              marker = list(color = 'rgba(255, 30, 50, 255)')) %>%
+              line = list(color = 'rgba(255, 20, 20, 255)', shape = 'spline', width = 3),
+              marker = list(color = 'rgba(255, 20, 20, 255)')) %>%
     add_trace(x = ~Data, y = ~total_sugar, 
               name = 'Sugar', 
               mode = 'lines+markers',
-              line = list(color = 'azure', shape = 'spline'),
+              line = list(color = 'azure', shape = 'spline', width = 3),
               marker = list(color = 'azure'))
 
   return(fig)
