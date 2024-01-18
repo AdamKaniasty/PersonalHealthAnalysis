@@ -10,7 +10,7 @@ generate_nutrition_ui <- function() {
         box(
           title = "Daily calorie intake",
           status = "warning",
-          width = 10,
+          width = 12,
           solidHeader = TRUE,
           collapsible = FALSE,
           plotlyOutput("caloriePlot")
@@ -25,12 +25,6 @@ generate_nutrition_ui <- function() {
         )
         ),
       sidebarPanel(
-  
-        selectInput("plotMeanFood",
-                    "Show means of which parameters?",
-                    list("Fats", "Carbohydrates", "Protein", "Sugar"),
-                    selected = list("Fats", "Protein"),
-                    multiple = TRUE),
         
         box(
           title = "Is your body well-fed?",
