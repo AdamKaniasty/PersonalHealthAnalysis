@@ -74,3 +74,36 @@ foodPlot <- function(datasource, params, showmode){
 
   return(fig)
 }
+
+caloriePlot <- function(datasource){
+  
+  daily_calories <- read.csv(datasource) 
+  daily_calories <- daily_calories %>%
+    group_by(Data) %>%
+    reframe(total_calories = sum(`Kalorie`),
+              numdate = as.numeric(as.Date(`Data`)),
+              num_meals = n())
+  
+  fig <- plot_ly(
+    daily_calories,
+    type = 'barpolar',
+    theta = ~numdate*360/(max(daily_calories$numdate) - min(daily_calories$numdate) + 1), #Divides circle to required number of slices
+    r = ~sqrt(total_calories/num_meals),
+    hoverinfo = 'text',
+    text = ~paste('Date: ', Data, '<br>Consumed calories: ', total_calories),
+    marker = list(color = ~total_calories, colorscale = "Temps")
+  )
+  
+  fig <- fig %>% layout(
+    polar = list(
+      radialaxis = list(visible = TRUE, 
+                        range = c(0, 140),
+                        tickvals = list(sqrt(250)*2, sqrt(500)*2, sqrt(1000)*2, sqrt(2000)*2, sqrt(4000)*2),
+                        ticktext = list('250', '500', '1000', '2000', '4000')), #Now intake is relative to field of slice
+      angularaxis = list(direction = "clockwise")
+    ),
+    showlegend = FALSE
+  )
+  
+  return(fig)
+}
