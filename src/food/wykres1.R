@@ -74,3 +74,32 @@ foodPlot <- function(datasource, params, showmode){
 
   return(fig)
 }
+
+caloriePlot <- function(datasource){
+  
+  daily_calories <- read.csv(datasource) 
+  daily_calories <- daily_calories %>%
+    group_by(Data) %>%
+    reframe(total_calories = sum(`Kalorie`),
+              numdate = as.numeric(as.Date(`Data`)),
+              num_meals = n())
+
+  fig <- plot_ly(
+    daily_calories,
+    type = 'barpolar',
+    theta = ~numdate*360/(max(daily_calories$numdate) - min(daily_calories$numdate) + 1), #Divides circle to required number of slices
+    r = ~total_calories/num_meals,
+    hoverinfo = 'text',
+    text = ~paste('Date: ', Data, '<br>Consumed calories: ', total_calories)
+  )
+  
+  fig <- fig %>% layout(
+    polar = list(
+      radialaxis = list(visible = TRUE, range = c(0, 5000)),
+      angularaxis = list(direction = "clockwise")
+    ),
+    showlegend = FALSE
+  )
+  
+  return(fig)
+}
