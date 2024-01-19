@@ -19,6 +19,7 @@ ui <- dashboardPage(
       # Conditional for silka page
       conditionalPanel(
         condition = "input.sidebar == 'silka'",
+        HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>Hevy</strong></p>")),
         checkboxGroupInput("variables", "Variables to Display:", 
                            choices = c("Weight" = "weight", "Reps" = "reps"),
                            selected = "weight"),
@@ -39,6 +40,7 @@ ui <- dashboardPage(
       # Conditional for mood page
       conditionalPanel(
         condition = "input.sidebar == 'mood'",
+        HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>Daylio</strong></p>")),
         dateRangeInput(
           "dateRange",
           "Wybierz zakres dat:",
@@ -56,6 +58,7 @@ ui <- dashboardPage(
       # Conditional for sleep page
       conditionalPanel(
         condition = "input.sidebar == 'sleep'",
+        HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>Sleep As Android</strong></p>")),
         dateRangeInput(
           "dateRangeSleep",
           "Wybierz zakres dat:",
@@ -67,6 +70,7 @@ ui <- dashboardPage(
       # Conditional for nutrition page
       conditionalPanel(
         condition = "input.sidebar == 'food'",
+        HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>MyFitnessPal</strong></p>")),
         radioButtons("showModeFood",
                     "Select style of chart",
                     choices = c("Lines and markers", "Bars"),
