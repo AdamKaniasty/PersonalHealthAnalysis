@@ -112,7 +112,7 @@ ui <- dashboardPage(
                                   mood, meals or trainings. In this project, we have decided 
                                   to use that opportunity to take a look at our lifestyles.
                                   Combining R, JS, HTML and CSS in its code, this application 
-                                  summarizes and analyzes important informations we have 
+                                  summarizes and analyzes important information we have 
                                   gathered about ourselves and our health.<br>")),
                        
                        libraries_used(),
