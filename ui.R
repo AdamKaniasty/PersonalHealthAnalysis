@@ -102,33 +102,20 @@ ui <- dashboardPage(
       tabItem(tabName = "main",
               fluidRow(
                 column(12, align = 'center',
-                       HTML(paste("<span style='font-size: 60px;'><strong>Welcome!</strong><br>
-                                  <span style='font-size: 20px;'>Introduction text<br>")),
-                                        
-                       HTML('<h2>Libraries used:</h2>
-                            <div class="col-md-4">
-                              <ul>
-                                <li>Library 1</li>
-                                <li>Library 2</li>
-                                <li>Library 3</li>
-                              </ul>
-                            </div>
-                      
-                            <div class="col-md-4">
-                              <ul>
-                                <li>Library 4</li>
-                                <li>Library 5</li>
-                                <li>Library 6</li>
-                              </ul>
-                            </div>
-                      
-                            <div class="col-md-4">
-                              <ul>
-                                <li>Library 7</li>
-                                <li>Library 8</li>
-                                <li>Library 9</li>
-                              </ul>
-                            </div>'),
+                       HTML(paste("<span style='font-size: 60px; margin-bottom: 10px;'>
+                                  <strong>Welcome!</strong></span><br>
+                                  <span style='font-size: 20px;'>
+                                  Modern technology advancements have enabled a lot of 
+                                  different ways to control your well-being better - applications 
+                                  on your smartphone can help you see how effectively you
+                                  eat, sleep or exercise. They allow you to easily track your 
+                                  mood, meals or trainings. In this project, we have decided 
+                                  to use that opportunity to take a look at our lifestyles.
+                                  Combining R, JS, HTML and CSS in its code, this application 
+                                  summarizes and analyzes important informations we have 
+                                  gathered about ourselves and our health.<br>")),
+                       
+                       libraries_used(),
                        
                        HTML('<h2>About us:</h2>')
                             ),
@@ -149,7 +136,7 @@ ui <- dashboardPage(
                        align = 'center'),
                 column(4, intro_columns("./photos/Mateusz.jpg", 
                                         "Mateusz Król", 
-                                        "Krotki opis",
+                                        "From Koszalin. Currently studies data analysis on Warsaw University of Technology. Fan of cycling and astronomy.",
                                         "https://github.com/mkrol11",
                                         "https://www.linkedin.com/in/mateusz-król-1a6a38265"), 
                        align = 'center')
