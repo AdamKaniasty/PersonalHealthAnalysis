@@ -27,7 +27,7 @@ generate_nutrition_ui <- function() {
       sidebarPanel(
         
         box(
-          title = "Is your body well-fed?",
+          title = "Are you eating well?",
           status = "warning",
           width = 12,
           solidHeader = TRUE,
