@@ -10,3 +10,55 @@ intro_columns <- function(image_path, title, description, github_link, linkedin_
 }
 
 # Ta funkcja jest konieczna, aby uniknąć printowania "TRUE" z boku kolumn
+
+
+libraries_used <- function() {
+  HTML('<h2>Libraries used:</h2>
+                            <div class="col-md-2">
+                              <ul class="text-left">
+                                <li><strong>shiny</strong></li>
+                                <li>grid</li>
+                                <li>r2d3</li>
+                              </ul>
+                            </div>
+                      
+                            <div class="col-md-2">
+                              <ul class="text-left">
+                                <li>chron</li>
+                                <li>htmltools</li>
+                                <li>RColorBrewer</li>
+                              </ul>
+                            </div>
+                      
+                            <div class="col-md-2">
+                              <ul class="text-left">
+                                <li>dbplyr</li>
+                                <li>jsonlite</li>
+                                <li>readr</li>
+                              </ul>
+                            </div>
+                            
+                            <div class="col-md-2">
+                              <ul class="text-left">
+                                <li>dplyr</li>
+                                <li>lubridate</li>
+                                <li>shinydashboard</li>
+                              </ul>
+                            </div>
+                            
+                            <div class="col-md-2">
+                              <ul class="text-left">
+                                <li>ggplot2</li>
+                                <li>magick</li>
+                                <li>shinyjqui</li>
+                              </ul>
+                            </div>
+                            
+                            <div class="col-md-2">
+                              <ul class="text-left">
+                                <li>ggthemr</li>
+                                <li>plotly</li>
+                                <li>tidyr</li>
+                              </ul>
+                            </div>')
+}
