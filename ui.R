@@ -102,31 +102,59 @@ ui <- dashboardPage(
       tabItem(tabName = "main",
               fluidRow(
                 column(12, align = 'center',
-                       "Tu na górze będą informacje o projekcie i użytych bibliotekach, oczywiście odpowiednio wystylowane")
+                       HTML(paste("<span style='font-size: 60px;'><strong>Welcome!</strong><br>
+                                  <span style='font-size: 20px;'>Introduction text<br>")),
+                                        
+                       HTML('<h2>Libraries used:</h2>
+                            <div class="col-md-4">
+                              <ul>
+                                <li>Library 1</li>
+                                <li>Library 2</li>
+                                <li>Library 3</li>
+                              </ul>
+                            </div>
+                      
+                            <div class="col-md-4">
+                              <ul>
+                                <li>Library 4</li>
+                                <li>Library 5</li>
+                                <li>Library 6</li>
+                              </ul>
+                            </div>
+                      
+                            <div class="col-md-4">
+                              <ul>
+                                <li>Library 7</li>
+                                <li>Library 8</li>
+                                <li>Library 9</li>
+                              </ul>
+                            </div>'),
+                       
+                       HTML('<h2>About us:</h2>')
+                            ),
               ),
+              
               fluidRow(
                 column(4, intro_columns("./photos/Adam.jpg", 
                                         "Adam Kaniasty", 
-                                        "Krótki opis",
+                                        "Krotki opis",
                                         "https://github.com/AdamKaniasty",
                                         "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), 
                        align = 'center'),
                 column(4, intro_columns("./photos/Hubert.jpg", 
                                         "Hubert Kowalski", 
-                                        "Krótki opis",
+                                        "Krotki opis",
                                         "https://github.com/kowalskihubert",
                                         "https://www.linkedin.com/in/hubert-kowalski-1b19bb1a3"), 
                        align = 'center'),
                 column(4, intro_columns("./photos/Mateusz.jpg", 
                                         "Mateusz Król", 
-                                        "Krótki opis",
+                                        "Krotki opis",
                                         "https://github.com/mkrol11",
                                         "https://www.linkedin.com/in/mateusz-król-1a6a38265"), 
                        align = 'center')
-              ),
-              fluidRow(
-                column(1)
-            )
+              )
+              
       ),
       tabItem(tabName = "silka",
               fluidRow(
@@ -156,3 +184,4 @@ ui <- dashboardPage(
   ),
   skin = "purple"
 )
+
