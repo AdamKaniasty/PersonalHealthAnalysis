@@ -95,7 +95,14 @@ caloriePlot <- function(datasource){
     r = ~cal_root,
     hoverinfo = 'text',
     text = ~paste('Date: ', Data, '<br>Consumed kcal: ', total_calories),
-    marker = list(color = ~total_calories, colorscale = "Temps")
+    marker = list(color = ~total_calories, 
+                  colorscale = "Temps", 
+                  cmin = 0, cmax = 5000,
+                  colorbar = list(
+                    title = "Daily kcal intake",
+                    titlefont = list(color = "white"),
+                    tickfont = list(color = "white")),
+                  showlegend = TRUE)
   )
   
   fig <- fig %>% layout(
@@ -122,3 +129,4 @@ caloriePlot <- function(datasource){
   
   return(fig)
 }
+
