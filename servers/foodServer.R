@@ -2,14 +2,20 @@ source("./src/food/wykres1.R")
 
 foodLogic <- function(input, output, session) {
   
-  output$foodPlot <- renderPlotly({
-    foodPlot("./data/food/Podsumowanie-żywienia-2024-01-02-do-2024-01-09.csv", 
-             input$showModeFood)
-    
-  })
+  foodReact <- reactive(
+  if (input$selectPerson == "Adam") {
+    "./data/food/zyw_ak.csv"
+  } else if (input$selectPerson == "Hubert") {
+    "./data/food/zyw_hk.csv"
+  } else {
+    "./data/food/zyw_mk.csv"
+  }
+  )
   
   output$caloriePlot <- renderPlotly({
-    caloriePlot("./data/food/Podsumowanie-żywienia-2024-01-02-do-2024-01-09.csv")
+    caloriePlot(foodReact())
+  })
+  output$foodPlot <- renderPlotly({
+    foodPlot(foodReact(), input$showModeFood)
   })
 }
-
