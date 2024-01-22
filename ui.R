@@ -19,7 +19,7 @@ ui <- dashboardPage(
       radioButtons("selectPerson",
                    "Select person to show: ",
                    choices = c("Adam", "Hubert", "Mateusz"),
-                   selected = "Mateusz"),
+                   selected = "Adam"),
       
       # Conditional for silka page
       conditionalPanel(
