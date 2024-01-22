@@ -16,6 +16,11 @@ ui <- dashboardPage(
       menuItem("Sleep", tabName = "sleep", icon = icon("bed")),
       menuItem("Emotions", tabName = "mood", icon = icon("smile")),
       menuItem("Nutrition", tabName = "food", icon = icon("utensils")),
+
+      radioButtons("selectPerson",
+                   "Select person to show: ",
+                   choices = c("Adam", "Hubert", "Mateusz"),
+                   selected = "Adam"),
       
       # Conditional for silka page
       conditionalPanel(
