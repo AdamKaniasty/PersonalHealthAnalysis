@@ -35,7 +35,7 @@ moodUI <- fluidPage(
           solidHeader = TRUE,
           collapsible = FALSE,
           width = 9,
-          plotOutput("moodPlot", height = "600px")
+          plotlyOutput("moodPlotly", height = "600px")
         )
         ),
       fluidRow(

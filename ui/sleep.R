@@ -5,7 +5,7 @@ library(shinydashboard)
 generate_sleep_ui <- function() {
   
 sleepUI <- fluidPage(
-  titlePanel("Analiza jakości i długości snu"),
+  titlePanel("Quality and length of sleep analysis"),
   
   fluidRow(
     box(
@@ -14,7 +14,11 @@ sleepUI <- fluidPage(
       solidHeader = TRUE,
       collapsible = FALSE,
       width = 6,
-      p("The plot on the right shows the time when each of us went to bed.", style = "font-size: 20px;"),
+      p("Explore our nightly adventures through a captivating line plot featuring the sleep habits of all three of us. 
+      Each line represents the time of falling asleep (Y-axis) across different days (X-axis). Notice the distinctive patterns – Adam, the night owl, consistently hits the sack latest, Mateusz, the early bird, calls it a night the soonest, and Hubert gracefully balances in between. 
+      During the winter holidays, our bedtime stories took a fascinating turn, with a collective tendency to embrace the night until around 2 - 4 AM. The climax? 
+      A sleepless New Year's celebration, peaking on December 31st, with Adam bidding adieu to the night at almost 5 in the morning.
+        ", style = "font-size: 20px;"),
     ),
     box(
       title = "Bedtime line plot",

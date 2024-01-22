@@ -6,7 +6,8 @@ source("./src/mood/wykresCzynnosciGraf.R")
 
 moodLogic <- function(input, output, session) {
   
-  output$moodPlot <- renderPlot({
+  
+  output$moodPlotly <- renderPlotly({
     startDate <- as.Date(input$dateRange[1])
     endDate <- as.Date(input$dateRange[2])
     

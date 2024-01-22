@@ -36,20 +36,20 @@ daylio_moods_sin <- daylio_moods %>%
 
 
 # Change of mood in time (lollipop plot)
-ggthemr::ggthemr(palette = 'earth')
 daylio_moods %>%
   ggplot(aes(x = as.Date(full_date))) +
   geom_linerange(data = daylio_moods_dup, aes(x = as.Date(full_date), ymin = minm, ymax = meanm, color = minm), size = 1.5) +
   geom_linerange(data = daylio_moods_dup, aes(x = as.Date(full_date), ymin = meanm, ymax = maxm, color = maxm), size = 1.5) + 
   geom_point(data = daylio_moods, aes(x = as.Date(full_date), y = value, color = value), size = 6) + 
   theme(
-    plot.title = element_text(size = 20, hjust = 0.5),
-    axis.text.x = element_text(angle = 30, hjust = 0.5, vjust = 0.5, size = 14),
-    axis.text.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 14),
-    axis.title = element_text(size = 16),
+    plot.title = element_text(size = 17, hjust = 0.5, color = "#f7f7f7"),
+    axis.text.x = element_text(angle = 30, hjust = 0.5, vjust = 0.5, size = 11, color = "#f7f7f7"),
+    axis.text.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 11, color = "#f7f7f7"),
+    axis.title = element_text(size = 12, color = "#f7f7f7"),
     panel.grid.major.x = element_blank(),
     legend.position = "none",
-    panel.background = element_rect(fill = "white")
+    panel.background = element_rect(fill = "rgba(0,0,0,0)"),
+    plot.background = element_rect(fill = "rgba(0,0,0,0)")
   ) + 
   labs(
     title = "Mood change in time",
@@ -69,5 +69,18 @@ daylio_moods %>%
     colours = c("#FF0000", "#FFA500", "#FFFF00", "#00FF00", "#008000")
   ) -> mood_change_lollipop
 
-  return(mood_change_lollipop)
+
+  map_moods_list <- list("terrible", "bad", "so-so", "good", "fantastic")
+  names(map_moods_list) <- c(1.0, 2.0, 3.0, 4.0, 5.0)
+  
+  mood_change_lollipop_plotly <- ggplotly(mood_change_lollipop) %>%
+    style(
+      hovertext = paste0(
+        "<b>Date:</b> ", daylio_moods$full_date, "<br>",
+        "<b>Mood:</b> ", map_moods_list[daylio_moods$value]
+      )
+    )
+  mood_change_lollipop_plotly
+
+  return(mood_change_lollipop_plotly)
 }

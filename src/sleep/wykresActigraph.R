@@ -74,6 +74,22 @@ for (i in 1:length(data_list)) {
 
 actigraphPlot <- function(date, user) {
   
+  if((date %in% map_dates$date) == FALSE) {
+    # Empty plot with no X ticks and with 0-10 scale on Y axis and no data, with title of "No data for {date} for {user}"
+    margin <- list(autoexpand = TRUE,
+                   l = 30,
+                   r = 20,
+                   t = 50,
+                   b = 100)
+    # Dont draw the line
+    plotly::plotly_empty() %>%
+      layout(title = list(text = paste0("No data for ", date, " for ", user), font = list(color = "#f7f7f7")), 
+             margin = margin,
+             plot_bgcolor = "rgba(0,0,0,0)",
+             paper_bgcolor = 'rgba(0,0,0,0)'
+             ) -> noDataPlot
+    return(noDataPlot)
+  }
   # Get the dataframe for the date
   df <- data_list[[map_dates[map_dates$date == date, ]$ind]]
   
@@ -102,12 +118,20 @@ actigraphPlot <- function(date, user) {
                  t = 50,
                  b = 100)
   
-  p <- layout(p, title = paste0("Actigraph plot for ", date, " for ", user), 
-              xaxis = list(title = "Time during the night", tickangle = 45, titlefont = list(size = 16)), 
-              yaxis = list(title = "Sleep activity", titlefont = list(size = 16)),
+  p <- layout(p, title = list(text = paste0("Actigraph plot for ", date, " for ", user), font = list(color = "#f7f7f7")), 
+              xaxis = list(title = "Time during the night", tickangle = 45, titlefont = list(size = 16), 
+                           color = "#f7f7f7",
+                           gridcolor = 'rgba(247, 247, 247, 0.5)',
+                           zerolinecolor = 'rgba(247, 247, 247, 0.5)'), 
+              yaxis = list(title = "Sleep activity", titlefont = list(size = 16), 
+                           color = "#f7f7f7",
+                           gridcolor = 'rgba(247, 247, 247, 0.5)',
+                           zerolinecolor = 'rgba(247, 247, 247, 0.5)'),
               annotations = list(x = 1, y = -0.3, text = "10 - fully awake, 0 - deeply asleep", 
-                   showarrow = F, xref = "paper", yref = "paper", font=list(size=12, color="black")),
-              margin = margin
+                   showarrow = F, xref = "paper", yref = "paper", font=list(size=12, color="#f7f7f7")),
+              margin = margin,
+              plot_bgcolor = "rgba(0,0,0,0)",
+              paper_bgcolor = 'rgba(0,0,0,0)'
               )
   
   

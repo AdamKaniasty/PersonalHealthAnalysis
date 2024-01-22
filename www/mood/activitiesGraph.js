@@ -3,7 +3,10 @@
 // Initialization
 svg.attr("font-family", "sans-serif")
   .attr("font-size", "16")
-  .attr("text-anchor", "middle");
+  .attr("text-anchor", "middle")
+  .style("background-color", "transparent")
+  .style("font-weight", "bold")
+  .style("fill", "white");
 
 var svgSize = 800;
 var pack = d3.pack()

@@ -227,9 +227,9 @@ leg <- list(
   font = list(
     family = "sans-serif",
     size = 14,
-    color = "#000"),
-  bgcolor = "#FFFFFF",
-  bordercolor = "#FFFFFF"
+    color = "#f7f7f7"),
+  bgcolor = "rgba(0,0,0,0)",
+  bordercolor = "rgba(0,0,0,0)"
   )
 
 margin <- list(autoexpand = TRUE,
@@ -240,16 +240,25 @@ margin <- list(autoexpand = TRUE,
 
 sleeptime_plotly <- sleeptime_plotly %>%
   layout(
-    title = "Time of going to sleep each day",
-    xaxis = list(title = "Date"),
+    title = list(text ="Time of going to sleep each day", font = list(color = "#f7f7f7")),
+    xaxis = list(title = "Date",
+                 color = "#f7f7f7",
+                 gridcolor = 'rgba(247, 247, 247, 0.5)',
+                 zerolinecolor = 'rgba(247, 247, 247, 0.5)'),
     yaxis = list(title = "Time of going to sleep", 
                  zeroline = FALSE, 
                  #range = c(-0.004,0.21),
                  type = "time",
-                 tickformat = "%H:%M"
+                 tickformat = "%H:%M",
+                 color = "#f7f7f7",
+                 gridcolor = 'rgba(247, 247, 247, 0.5)',
+                 zerolinecolor = 'rgba(247, 247, 247, 0.5)'
                  ),
     legend = leg,
-    margin = margin
+    margin = margin,
+    paper_bgcolor = "rgba(0,0,0,0)",
+    plot_bgcolor = "rgba(0,0,0,0)"
+
   )
 
 return (sleeptime_plotly)

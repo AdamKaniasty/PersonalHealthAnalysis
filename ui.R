@@ -1,12 +1,13 @@
 library(shiny)
 library(shinydashboard)
+library(lubridate)
 source("./intro/intro.R")
 source("./ui/sleep.R")
 source("./ui/mood.R")
 source("./ui/food.R")
 
 ui <- dashboardPage(
-  dashboardHeader(title = "Ja"),
+  dashboardHeader(title = "HealthieR"),
   dashboardSidebar(
     sidebarMenu(
       id = "sidebar",
@@ -134,7 +135,10 @@ ui <- dashboardPage(
                        align = 'center'),
                 column(4, intro_columns("./photos/Hubert.jpg", 
                                         "Hubert Kowalski", 
-                                        "Krotki opis",
+                                        "I'm a student at Warsaw University of Technology, originally from the charming city of Bydgoszcz. 
+                                        While I've dabbled in various sports like calisthenics or squash, these days, climbing is 
+                                        my go-to workout. Outside the university hustle, you'll find me enjoying skiing, playing the piano and unwinding with a good movie. 
+                                        ",
                                         "https://github.com/kowalskihubert",
                                         "https://www.linkedin.com/in/hubert-kowalski-1b19bb1a3"), 
                        align = 'center'),
@@ -150,7 +154,7 @@ ui <- dashboardPage(
       tabItem(tabName = "silka",
               fluidRow(
                 column(12,
-                       source("./ui/gym.R", local = TRUE)
+                       #source("./ui/gym.R", local = TRUE)
                 )
               )
       ),
