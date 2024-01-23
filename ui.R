@@ -149,7 +149,8 @@ ui <- dashboardPage(
                        align = 'center'),
                 column(4, intro_columns("./photos/Mateusz.jpg", 
                                         "Mateusz Król", 
-                                        "From Koszalin. Currently studies data analysis on Warsaw University of Technology. Fan of cycling and astronomy.",
+                                        "Originally from Koszalin near the Baltic Sea, I currently study data analysis at Warsaw University of Technology. 
+                                        Fan of all things space-related, from astronomy to science-fiction games. When the weather is good, I enjoy long cycling trips.",
                                         "https://github.com/mkrol11",
                                         "https://www.linkedin.com/in/mateusz-król-1a6a38265"), 
                        align = 'center')
