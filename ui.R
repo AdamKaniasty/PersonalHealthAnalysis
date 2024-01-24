@@ -64,7 +64,7 @@ ui <- dashboardPage(
       # Conditional for sleep page
       conditionalPanel(
         condition = "input.sidebar == 'sleep'",
-        HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>Sleep As Android</strong></p>")),
+        HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>Sleep Android</strong></p>")),
         dateRangeInput(
           "dateRangeSleep",
           "Wybierz zakres dat:",
