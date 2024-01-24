@@ -78,7 +78,7 @@ ui <- dashboardPage(
         condition = "input.sidebar == 'food'",
         HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>MyFitnessPal</strong></p>")),
         radioButtons("showModeFood",
-                    "Select style of chart",
+                    "Select plot type:",
                     choices = c("Lines and markers", "Bars"),
                     selected = "Lines and markers")
       )
