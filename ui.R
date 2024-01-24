@@ -49,13 +49,13 @@ ui <- dashboardPage(
         HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>Daylio</strong></p>")),
         dateRangeInput(
           "dateRange",
-          "Wybierz zakres dat:",
+          "Select date range:",
           start = "2023-12-12",
           end = "2024-01-07",
         ),
         radioButtons(
           "chartType",
-          "Wybierz typ wykresu:",
+          "Select plot type:",
           choices = c("Lollipop", "Line"),
           selected = "Lollipop"
         )
@@ -67,7 +67,7 @@ ui <- dashboardPage(
         HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>Sleep As Android</strong></p>")),
         dateRangeInput(
           "dateRangeSleep",
-          "Wybierz zakres dat:",
+          "Select date range:",
           start = "2023-12-12",
           end = "2024-01-07",
         )

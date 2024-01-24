@@ -13,7 +13,7 @@ sleepUI <- fluidPage(
       status = "primary",
       solidHeader = TRUE,
       collapsible = FALSE,
-      width = 6,
+      width = 3,
       p("Explore our nightly adventures through a captivating line plot featuring the sleep habits of all three of us. 
       Each line represents the time of falling asleep (Y-axis) across different days (X-axis). Notice the distinctive patterns – Adam, the night owl, consistently hits the sack latest, Mateusz, the early bird, calls it a night the soonest, and Hubert gracefully balances in between. 
       During the winter holidays, our bedtime stories took a fascinating turn, with a collective tendency to embrace the night until around 2 - 4 AM. The climax? 
@@ -25,10 +25,13 @@ sleepUI <- fluidPage(
       status = "primary",
       solidHeader = TRUE,
       collapsible = FALSE,
-      width = 6,
-      shinyjqui::jqui_resizable(plotlyOutput("sleeptimePlot"))
+      width = 9,
+      height = "700px",
+      shinyjqui::jqui_resizable(plotlyOutput("sleeptimePlot", height = "610px"))
     )
   ),
+  # add some space between rows
+  tags$hr(),
   
   fluidRow(
     box(
@@ -36,7 +39,7 @@ sleepUI <- fluidPage(
       status = "warning",
       solidHeader = TRUE,
       collapsible = FALSE,
-      width = 6,
+      width = 9,
       plotlyOutput("actigraphPlot")
     ),
     box(
@@ -44,7 +47,7 @@ sleepUI <- fluidPage(
       status = "warning",
       solidHeader = TRUE,
       collapsible = FALSE,
-      width = 6,
+      width = 3,
       p("Actigraph gives us an insight into the details of our sleep. It presents the sleep
         duration as well as activity during sleep, measured by the sounds like snoring or coughing
         but also by the movement of body. Since each graph represents a separate night, in order to

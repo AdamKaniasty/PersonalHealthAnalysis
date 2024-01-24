@@ -120,7 +120,7 @@ caloriePlot <- function(datasource){
                          rotation = 270, 
                          dtick = 360/(max(daily_calories$numdate) - min(daily_calories$numdate) + 1),
                          showticklabels = FALSE),
-                         ticktext = seq.Date(as.Date(min(daily_calories$numdate)), as.Date(max(daily_calories$numdate)), by = 1)
+      ticktext = seq.Date(as.Date(min(daily_calories$numdate), origin = '1970-01-01'), as.Date(max(daily_calories$numdate), origin = '1970-01-01'), by = 1)
     ),
     showlegend = FALSE,
     title = list(text = 'Sum of kcal consumed on each day', 

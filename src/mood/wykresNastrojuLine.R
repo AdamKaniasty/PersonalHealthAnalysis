@@ -1,9 +1,18 @@
 library(dplyr)
 library(ggplot2)
 
-daylio <- read.csv("./data/mood/daylio-export-H2.csv", header = TRUE)
 
-moodLine <- function(startDate, endDate) {
+moodLine <- function(startDate, endDate, user) {
+  
+  if(user == "Hubert") {
+    daylio <- read.csv("./data/mood/daylio-export-H2.csv", header = TRUE)
+  }
+  else if(user == "Mateusz") {
+    daylio <- read.csv("./data/mood/daylio-export-M.csv", header = TRUE)
+  }
+  else if(user == "Adam") {
+    daylio  <- read.csv("./data/mood/daylio-export-A.csv", header = TRUE, sep = ";")
+  }
 
 # Mapping moods to integers:
 map_mood <- data.frame(
@@ -99,7 +108,7 @@ daylio_moods_line <- daylio_moods_line %>%
       text = ~paste("<b>Date: </b>", full_date, "<br><b>Mood:</b> ", map_moods_list[value])
     ) %>%
     layout(
-      title = list(text = "Mood change in time", font = list(color = "#f7f7f7")),
+      title = list(text = paste0("Mood change in time for ", user), font = list(color = "#f7f7f7")),
       xaxis = list(
         title = "Date",
         tickformat = "%d %b",

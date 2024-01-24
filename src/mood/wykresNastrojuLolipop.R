@@ -2,9 +2,19 @@ library(dbplyr)
 library(ggplot2)
 library(plotly)
 
-daylio <- read.csv("./data/mood/daylio-export-H2.csv", header = TRUE)
 
-moodLollipop <- function(startDate, endDate) {
+
+moodLollipop <- function(startDate, endDate, user) {
+  
+  if(user == "Hubert") {
+    daylio <- read.csv("./data/mood/daylio-export-H2.csv", header = TRUE)
+  }
+  else if(user == "Mateusz") {
+    daylio <- read.csv("./data/mood/daylio-export-M.csv", header = TRUE)
+  }
+  else if(user == "Adam") {
+    daylio  <- read.csv("./data/mood/daylio-export-A.csv", header = TRUE, sep = ";")
+  }
 
 
 # Mapping moods to integers:
@@ -52,7 +62,7 @@ daylio_moods %>%
     plot.background = element_rect(fill = "rgba(0,0,0,0)")
   ) + 
   labs(
-    title = "Mood change in time",
+    title = paste0("Mood change in time for ", user),
     x = "Date",
     y = "Mood"
   ) + 

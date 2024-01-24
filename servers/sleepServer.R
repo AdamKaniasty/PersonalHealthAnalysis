@@ -13,7 +13,7 @@ sleepLogic <- function(input, output, session) {
   
   output$actigraphPlot <- renderPlotly({
     dateActi <- as.Date(input$dateActigraph)
-    actigraphPlot(dateActi, "Hubert") # Tu będzie podawany user, trzeba wtedy w funkcji actigraphPlot go uwzględnić
+    actigraphPlot(dateActi, input$selectPerson) # Tu będzie podawany user, trzeba wtedy w funkcji actigraphPlot go uwzględnić
   })
   
   

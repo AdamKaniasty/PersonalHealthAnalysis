@@ -1,11 +1,12 @@
 library(plotly)
 library(shinyjqui)
 library(shinydashboard)
+library(r2d3)
 
 generate_mood_ui <- function() {
   
 moodUI <- fluidPage(
-  titlePanel("Analiza zmian nastroju w czasie"),
+  titlePanel("Analysis of mood, emotions and activities"),
 
       fluidRow(
         column(
@@ -20,12 +21,14 @@ moodUI <- fluidPage(
             The line chart shows the average mood for each day. ", style = "font-size: 20px;"),
             ),
           box(
-            title = "What impacts happiness the most?",
+            title = "Further insights",
             status = "primary",
             solidHeader = TRUE,
             collapsible = FALSE,
             width = 12,
-            p("IDK yet", style = "font-size: 20px;"),
+            p("Embark on a visual journey into the life of an average student at Warsaw University of Technology through 2 bubble charts. 
+            The first plot portrays emotions, offering insights into the emotional landscape of student life. 
+            The second focuses on daily activities. On both plots circle sizes reflect the frequency of given act.", style = "font-size: 20px;"),
             ),
           width = 3
           ),

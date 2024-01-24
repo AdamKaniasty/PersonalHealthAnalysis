@@ -12,18 +12,18 @@ moodLogic <- function(input, output, session) {
     endDate <- as.Date(input$dateRange[2])
     
     if (input$chartType == "Lollipop") {
-      moodLollipop(startDate, endDate)
+      moodLollipop(startDate, endDate, input$selectPerson)
     } else if (input$chartType == "Line") {
-      moodLine(startDate, endDate)
+      moodLine(startDate, endDate, input$selectPerson)
     }
   })
   
   output$emotionsPlot <- renderD3({
-    emotionsGraph()
+    emotionsGraph(input$selectPerson)
   })
   
   output$activitiesPlot <- renderD3({
-    activGraph()
+    activGraph(input$selectPerson)
   })
   
   
