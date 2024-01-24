@@ -26,14 +26,14 @@ ui <- dashboardPage(
       conditionalPanel(
         condition = "input.sidebar == 'silka'",
         HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>Hevy</strong></p>")),
-        checkboxGroupInput("variables", "Variables to Display:", 
-                           choices = c("Weight" = "weight", "Reps" = "reps"),
-                           selected = "weight"),
+        radioButtons("variables", "Variables to Display:", 
+                     choices = c("Weight" = "weight", "Reps" = "reps"),
+                     selected = "weight"),
         selectInput(
           "spider_date_start",
           "Select Date",
-          choices = c(7, 31, 10000),
-          selected = 7
+          choices = c(7, 31, 365),
+          selected = 31
         ),
         dateRangeInput(
           "dateRangeGym",
@@ -134,9 +134,9 @@ ui <- dashboardPage(
               fluidRow(
                 column(4, intro_columns("./photos/Adam.jpg", 
                                         "Adam Kaniasty", 
-                                        "Krotki opis",
+                                        "Student of Data Science at Warsaw University of Technology. Co-Founder of A{P}PI Marketplace",
                                         "https://github.com/AdamKaniasty",
-                                        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), 
+                                        "https://www.linkedin.com/in/adam-kaniasty-35a5a21a6/"), 
                        align = 'center'),
                 column(4, intro_columns("./photos/Hubert.jpg", 
                                         "Hubert Kowalski", 
@@ -160,7 +160,7 @@ ui <- dashboardPage(
       tabItem(tabName = "silka",
               fluidRow(
                 column(12,
-                       #source("./ui/gym.R", local = TRUE)
+                       source("./ui/gym.R", local = TRUE)
                 )
               )
       ),

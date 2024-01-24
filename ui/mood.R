@@ -1,12 +1,12 @@
 library(plotly)
 library(shinyjqui)
 library(shinydashboard)
+library(r2d3)
 
 generate_mood_ui <- function() {
   
 moodUI <- fluidPage(
   titlePanel("Analiza zmian nastroju w czasie"),
-
       fluidRow(
         column(
           box(

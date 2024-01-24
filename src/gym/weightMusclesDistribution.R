@@ -2,16 +2,12 @@ library(plotly)
 library(dplyr)
 library(RColorBrewer)
 
-data <- read.csv("./data/gym/predki.csv")
-
-weightDistribution <- function(input) {
+weightDistribution <- function(data, input) {
   plotData <- data
   
-  #pastel_palette <- brewer.pal(6, "Pastel1")
-  pastel_palette <- c('#ffafc4', '#93d79b', '#fcac96', '#85b3b7', '#e6a0b7', '#fcac96')
+  pastel_palette <- c('#FAEDCB', '#C9E4DE', '#C6DEF1', '#DBCDF0', '#F2C6DE', '#F7D9C4')
   
   color_mapping <- setNames(pastel_palette, unique(plotData$muscle_group))
-
   
   p <- plot_ly()
   
@@ -21,15 +17,15 @@ weightDistribution <- function(input) {
     
     if ("weight" %in% input$variables) {
       p <- p %>% add_trace(data = group_data, x = ~muscle_group, y = ~weight_kg, 
-                           type = 'violin', name = 'Weight',
+                           type = 'violin', name = muscle_group,
                            line = list(color = color_mapping[muscle_group]),
                            fillcolor = pastel_palette[muscle_group]
-                           )
+      )
     }
     
     if ("reps" %in% input$variables) {
       p <- p %>% add_trace(data = group_data, x = ~muscle_group, y = ~reps, 
-                           type = 'violin', name = 'Reps',
+                           type = 'violin', name = muscle_group,
                            line = list(color = color_mapping[muscle_group]))
     }
   }
@@ -49,7 +45,8 @@ weightDistribution <- function(input) {
       color = '#f7f7f7',
       gridcolor = 'rgba(247, 247, 247, 0.5)',
       zerolinecolor = 'rgba(247, 247, 247, 0.5)'
-    )
+    ),
+    legend = list(title = list(text = 'Muscle Group'), orientation = 'v', x = 1, y = 1)
   )
   
   return(p)

@@ -1,5 +1,14 @@
 *{
   color: #F4F4F4;
+  font-family: Helvetica, sans-serif;
+}
+
+.tall-box { 
+  height: 70vh !important;
+}
+
+.tall-box > .row {
+  height: 100% !important;
 }
 
 .tooltip {
@@ -8,14 +17,23 @@
 	width: auto;
 	padding: 4px;
 	font: 12px sans-serif;
-	background: purple;
-	border: 0px;
+	background: #0b0b0b;
+	border: 1px solid rgba(255, 255 ,255 ,0.4);
 	border-radius: 8px;
 	pointer-events: none;
+	padding:1rem;
+}
+
+.selectize-input, .selectize-dropdown, .form-control, .datepicker, .input-group-addon {
+  background-color: #17181C !important;
+}
+
+.form-control{
+  color: #F4F4F4;
 }
 
 #gym_muscles{
-  height: 600px;
+  height: 500px !important;
 }
 
 #gym_muscles > img {
@@ -102,5 +120,5 @@ h2{
 
 .spider{
   padding:2rem !important;
-  margin-left:2rem !important;
 }
+
