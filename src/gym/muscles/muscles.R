@@ -23,7 +23,8 @@ images <- list()
 for (i in seq_len(nrow(total_reps))) {
   muscle <- total_reps$muscle_group[i]
   reps <- total_reps$total_reps[i]
-  
+  print(muscle)
+  print(reps)
   image_path <- paste0("./src/gym/muscles/images/", muscle, ".png")
   if (file.exists(image_path)) {
     image <- image_read(image_path)

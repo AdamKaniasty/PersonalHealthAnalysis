@@ -1,5 +1,6 @@
 library(shiny)
 options(shiny.autoreload = TRUE)
+Sys.setlocale("LC_ALL", "en_US.UTF-8")
 try(
   setwd("./projekty/health/")
 )

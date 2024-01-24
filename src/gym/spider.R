@@ -11,12 +11,6 @@ gymSpider <- function(data, all_data){
     mutate(exercises_count = exercises_count / num_days)
   
   
-  overall_avg <- all_data %>%
-    group_by(muscle_group) %>%
-    summarize(avg_exercises_count = sum(reps, na.rm = TRUE)) %>% 
-    mutate(avg_exercises_count = avg_exercises_count / num_days_all_data)
-  
-  
   p <- plot_ly() %>%
     add_trace(
       name = "Selected period",
@@ -40,18 +34,6 @@ gymSpider <- function(data, all_data){
       text = ~paste(muscle_group, ": ", exercises_count),
       hoverinfo = 'text',
       hoveron = "points"
-    ) %>%
-    add_trace(
-      name = "Overall",
-      data = overall_avg,
-      type = 'scatterpolar',
-      r = ~avg_exercises_count,
-      theta = ~muscle_group,
-      mode = 'lines',
-      fill = 'toself',
-      fillcolor = "#85b3b7",
-      opacity = .5,
-      line = list(color = "#00A8E8", width = 3, dash = 'dot')
     ) %>%
     layout(
       polar = list(
