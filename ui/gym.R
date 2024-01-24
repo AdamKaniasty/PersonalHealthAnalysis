@@ -90,7 +90,7 @@ gymUI <- tagList(gymUI,
 gymUI <- tagList(gymUI,
                  fluidRow(
                    box(
-                     title = "Bedtime line plot",
+                     title = "Total volume of workouts over weeks",
                      status = "primary",
                      solidHeader = TRUE,
                      collapsible = FALSE,

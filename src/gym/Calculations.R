@@ -11,7 +11,6 @@ gym_calculations <- function(filtered_data) {
   filtered_data_distinct <- filtered_data %>%
     distinct(start_time, .keep_all = TRUE)
   
-  print(filtered_data$weight_kg * filtered_data$reps)
 
   total_duration <- sum(difftime(filtered_data_distinct$end_time, 
                                  filtered_data_distinct$start_time, 
@@ -20,7 +19,6 @@ gym_calculations <- function(filtered_data) {
   total_volume <- sum(filtered_data$weight_kg * filtered_data$reps, na.rm = TRUE)
   total_reps <- sum(filtered_data$reps, na.rm = TRUE)
   
-  print(total_volume)
   
   
   return(list(

@@ -32,11 +32,12 @@ for (i in seq_len(nrow(total_reps))) {
 }
 
 composite_image <- images[[1]]
+
 for (i in 2:length(images)) {
   composite_image <- image_composite(composite_image, images[[i]], operator = "over")
 }
 
 other <- image_read(paste0("./src/gym/muscles/images/other.png"))
-image_composite <- image_composite(composite_image, other, operator = 'over')
+image_composite <- image_composite(other, composite_image, operator = 'over')
 image_write(image_composite, "image_composite.png")
 }
