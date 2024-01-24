@@ -7,9 +7,9 @@ foodPlot <- function(datasource, showmode){
   daily_calories <- read.csv(datasource) %>%
     group_by(Data) %>%
     summarize(total_calories = sum(Kalorie),
-                total_fats = sum(`Tłuszcze..g.`),
-                total_carbs = sum(`Węglowodany..g.`),
-                total_protein = sum(`Białko..g.`),
+                total_fats = sum(`Tluszcze..g.`),
+                total_carbs = sum(`Weglowodany..g.`),
+                total_protein = sum(`Bialko..g.`),
                 total_sugar = sum(`Cukier`),
                 num_meals = n())
     
