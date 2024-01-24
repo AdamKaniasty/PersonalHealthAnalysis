@@ -1,5 +1,3 @@
-# servers/gym.R
-
 library(r2d3)
 library(jsonlite)
 library(dplyr)
@@ -15,18 +13,52 @@ source("./src/gym/Calculations.R")
 
 gymLogic <- function(input, output, session) {
   
+  observe({
+    selected_days <- as.numeric(input$spider_date_start)
+    end_date <- Sys.Date()
+    start_date <- end_date - selected_days + 1
+    
+    updateDateRangeInput(session, "dateRangeGym", start = start_date, end = end_date)
+  })
+  
+  reactiveData <- reactiveVal()
+  reactiveDataFiltered <- reactiveVal()
+  
+  observeEvent(input$selectPerson, {
+    newData <- read.csv(paste0("./data/gym/", input$selectPerson, ".csv"))
+    reactiveData(newData)
+  }, ignoreNULL = TRUE)
+  
+  observe({
+    data <- reactiveData()
+    if(is.null(data)) {
+      return(NULL)
+    }
+    data$start_time <- as.POSIXct(data$start_time, format="%d/%m/%Y %H:%M")
+    data$end_time <- as.POSIXct(data$end_time, format="%d/%m/%Y %H:%M")
+    start_date_posix <- as.POSIXct(input$dateRangeGym[1])
+    end_date_posix <- as.POSIXct(input$dateRangeGym[2])
+    
+    reactiveData(data)
+    
+    filteredData <- data %>% filter(start_time >= start_date_posix & end_time <= end_date_posix)
+    
+    reactiveDataFiltered(filteredData)
+  })
+  
+
   output$gym_spider <- renderPlotly({
-    gymSpider(as.numeric(input$spider_date_start))
+    gymSpider(reactiveDataFiltered(), reactiveData())
   })
   
   output$gym_weight_distribution <- renderPlotly({
-    weightDistribution(input)
+    weightDistribution(reactiveDataFiltered(), input)
   })
   
   calculated_values <- reactive({
     start_date <- input$dateRangeGym[1]
     end_date <- input$dateRangeGym[2]
-    return(gym_calculations(start_date, end_date))
+    return(gym_calculations(reactiveDataFiltered()))
   })
   
   output$total_sets <- renderText({
@@ -49,17 +81,17 @@ gymLogic <- function(input, output, session) {
   })
   
   output$gym_muscles <- renderImage({
-    image <- musclesPlot()
+    image <- musclesPlot(reactiveDataFiltered())
     list(
-      src="./src/gym/muscles/image_composite.png"
+      src="image_composite.png"
     )
   }, deleteFile = T)
   
   output$stacked_progress <- renderD3({
-    data <- read.csv("./data/gym/predki.csv")
+    data <- reactiveData()
     processed_data <- data %>%
-      mutate(week = week(as.Date(start_time, format = "%d %b %Y")),
-             year = year(as.Date(start_time, format = "%d %b %Y")),
+      mutate(week = week(as.Date(start_time, format = "%d/%m/%Y")),
+             year = year(as.Date(start_time, format = "%d/%m/%Y")),
              total_weight = weight_kg * reps) %>%
       group_by(year, week, muscle_group) %>%
       summarize(total_weight = sum(total_weight, na.rm = TRUE)) %>%

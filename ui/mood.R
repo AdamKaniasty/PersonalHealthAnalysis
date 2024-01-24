@@ -7,7 +7,6 @@ generate_mood_ui <- function() {
   
 moodUI <- fluidPage(
   titlePanel("Analysis of mood, emotions and activities"),
-
       fluidRow(
         column(
           box(

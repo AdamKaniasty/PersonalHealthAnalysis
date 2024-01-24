@@ -3,9 +3,7 @@ library(readr)
 library(dplyr)
 library(lubridate)
 
-data <- read.csv("./data/gym/predki.csv")
-
-gym_progess <- function(){
+gym_progess <- function(data){
 
 data <- data %>%
   mutate(date = as.Date(start_time, format = "%d %b %Y")) %>%

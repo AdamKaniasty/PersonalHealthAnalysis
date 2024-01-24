@@ -5,13 +5,13 @@ library(plotly)
 
 gymUI <- fluidRow(
   column(12, 
-         h2("Gym Dashboard"))
+         h2("Gym performance analysis"))
 )
 
 gymUI <- tagList(gymUI, 
                  fluidRow(
                    box(
-                     title = "Bedtime line plot",
+                     title = "Stats",
                      status = "primary",
                      solidHeader = TRUE,
                      collapsible = FALSE,
@@ -28,7 +28,7 @@ gymUI <- tagList(gymUI,
                          verbatimTextOutput("total_sets")
                        ),
                        box(
-                         title = "Total sets",
+                         title = "Workouts' duration [h]",
                          status = "primary",
                          solidHeader = TRUE,
                          collapsible = FALSE,
@@ -38,7 +38,7 @@ gymUI <- tagList(gymUI,
                      ),
                      fluidRow(
                        box(
-                         title = "Total sets",
+                         title = "Number of workouts",
                          status = "primary",
                          solidHeader = TRUE,
                          collapsible = FALSE,
@@ -46,7 +46,7 @@ gymUI <- tagList(gymUI,
                          verbatimTextOutput("number_of_workouts")
                        ),
                        box(
-                         title = "Total sets",
+                         title = "Workouts' volume [T]",
                          status = "primary",
                          solidHeader = TRUE,
                          collapsible = FALSE,
@@ -56,7 +56,7 @@ gymUI <- tagList(gymUI,
                      )
                    ),
                    box(
-                     title = "Bedtime line plot",
+                     title = "Weight distribution per set for each muscle group",
                      status = "primary",
                      solidHeader = TRUE,
                      collapsible = FALSE,
@@ -68,23 +68,19 @@ gymUI <- tagList(gymUI,
 gymUI <- tagList(gymUI,
                  fluidRow(
                    box(
-                    title = "Bedtime line plot",
+                    title = "Reps count for each muscle group",
                     status = "primary",
                     solidHeader = TRUE,
                     collapsible = FALSE,
                     width = 12,
-                    class = "row2",
+                    class = "row2 tall-box",
                     fluidRow(
-                      column(3,
+                      column(6,
                              imageOutput("gym_muscles")
                       ),
-                      column(7,
+                      column(6,
                              class = "spider",
                              plotlyOutput("gym_spider")
-                      ),
-                      column(2, 
-                             h4("Information about Plot 3"),
-                             verbatimTextOutput("text1")
                       )
                     )
                     )

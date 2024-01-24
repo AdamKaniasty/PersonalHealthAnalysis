@@ -16,9 +16,12 @@ r2d3.onRender(function (data, div, width, height, options) {
 
 	var layers = stack(data);
 
+	var weeksWithData = data.filter(d => seriesNames.some(name => d[name] > 0));
+  var xDomain = weeksWithData.map(d => `${d.year} W${d.week}`);
+
 	var x = d3
 		.scaleBand()
-		.domain(data.map((d) => `${d.year} W${d.week}`))
+		.domain(xDomain)
 		.rangeRound([0, plotWidth])
 		.padding(0.1);
 
@@ -27,7 +30,8 @@ r2d3.onRender(function (data, div, width, height, options) {
 		.domain([0, d3.max(layers, (layer) => d3.max(layer, (d) => d[1]))])
 		.range([plotHeight, 0]);
 
-  var pastel_palette = ['#ffafc4', '#93d79b', '#fcac96', '#85b3b7', '#e6a0b7', '#fcac96'];
+  var pastel_palette = ['#D4B06D', '#7BA090', '#7094C8', '#A58CB8', '#C87BA2', '#DAA672'];
+
 	var color = d3.scaleOrdinal(pastel_palette).domain(seriesNames);
 
   var svg = div.append("svg")
@@ -67,7 +71,6 @@ r2d3.onRender(function (data, div, width, height, options) {
 		})
 		.attr("width", x.bandwidth());
 
-	// Axis Styling
 	g.append("g")
 		.attr("class", "axis axis--x")
 		.attr("transform", "translate(0," + plotHeight + ")")
@@ -80,8 +83,7 @@ r2d3.onRender(function (data, div, width, height, options) {
 		.style("font-size", "12px")
 		.style("color", "#f4f4f4")
 		.call(d3.axisLeft(y));
-	// Adding Labels to Bars
-	
+
 	layer
 		.selectAll("text")
 		.data(function (d) {
@@ -133,9 +135,11 @@ r2d3.onRender(function (data, div, width, height, options) {
 
 	rect
 		.on("mouseover", function (event, d) {
+      var muscleGroup = d3.select(this.parentNode).datum().key;
+      var totalWeight = d[1] - d[0];
 			tooltip.transition().duration(200).style("opacity", 0.9);
 			tooltip
-				.html("Total Weight: " + (d[1] - d[0]))
+        .html("Muscle Group: " + muscleGroup + "<br>Total Weight: " + totalWeight)
 				.style("left", event.pageX + "px")
 				.style("top", event.pageY - 28 + "px");
 		})
