@@ -12,7 +12,7 @@ ui <- dashboardPage(
     sidebarMenu(
       id = "sidebar",
       menuItem("Main Page", tabName = "main", icon = icon("dashboard")),
-      menuItem("Siłka", tabName = "silka", icon = icon("weight")),
+      menuItem("Gym", tabName = "silka", icon = icon("weight")),
       menuItem("Sleep", tabName = "sleep", icon = icon("bed")),
       menuItem("Emotions", tabName = "mood", icon = icon("smile")),
       menuItem("Nutrition", tabName = "food", icon = icon("utensils")),
