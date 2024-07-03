@@ -61,8 +61,8 @@ gymLogic <- function(input, output, session) {
     return(gym_calculations(reactiveDataFiltered()))
   })
   
-  output$total_sets <- renderText({
-    calculated_values()$total_sets
+  output$total_reps <- renderText({
+    calculated_values()$total_reps
   })
   
   

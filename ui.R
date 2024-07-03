@@ -12,7 +12,7 @@ ui <- dashboardPage(
     sidebarMenu(
       id = "sidebar",
       menuItem("Main Page", tabName = "main", icon = icon("dashboard")),
-      menuItem("Siłka", tabName = "silka", icon = icon("weight")),
+      menuItem("Gym", tabName = "silka", icon = icon("weight")),
       menuItem("Sleep", tabName = "sleep", icon = icon("bed")),
       menuItem("Emotions", tabName = "mood", icon = icon("smile")),
       menuItem("Nutrition", tabName = "food", icon = icon("utensils")),
@@ -78,7 +78,7 @@ ui <- dashboardPage(
         condition = "input.sidebar == 'food'",
         HTML(paste("<p style='padding-left: 10px;'>Tracking app used: <strong>MyFitnessPal</strong></p>")),
         radioButtons("showModeFood",
-                    "Select style of chart",
+                    "Select plot type:",
                     choices = c("Lines and markers", "Bars"),
                     selected = "Lines and markers")
       )

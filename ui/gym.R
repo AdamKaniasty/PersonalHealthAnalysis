@@ -19,13 +19,13 @@ gymUI <- tagList(gymUI,
                      class = 'box-calc',
                      fluidRow(
                        box(
-                         title = "Total sets",
+                         title = "Total reps",
                          status = "primary",
                          solidHeader = TRUE,
                          collapsible = FALSE,
                          width = 6,
                          class = 'box-calc-item',
-                         verbatimTextOutput("total_sets")
+                         verbatimTextOutput("total_reps")
                        ),
                        box(
                          title = "Workouts' duration [h]",
@@ -90,7 +90,7 @@ gymUI <- tagList(gymUI,
 gymUI <- tagList(gymUI,
                  fluidRow(
                    box(
-                     title = "Bedtime line plot",
+                     title = "Total volume of workouts over weeks",
                      status = "primary",
                      solidHeader = TRUE,
                      collapsible = FALSE,
